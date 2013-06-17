@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+char ch[25][25];
+int x,y,queue[1000],xx,yy,ql,qr;
+int bfs()
+{
+  int ans=0;
+	while(ql<qr)
+	{
+		if(queue[ql]>0&&ch[queue[ql]-1][queue[ql+1]]=='.')qr+=2,queue[qr-1]=queue[ql]-1,queue[qr]=queue[ql+1],ch[queue[qr-1]][queue[qr]]='*';
+		if(ch[queue[ql]+1][queue[ql+1]]=='.')qr+=2,queue[qr-1]=queue[ql]+1,queue[qr]=queue[ql+1],ch[queue[qr-1]][queue[qr]]='*';
+		if(queue[ql+1]>0&&ch[queue[ql]][queue[ql+1]-1]=='.')qr+=2,queue[qr-1]=queue[ql],queue[qr]=queue[ql+1]-1,ch[queue[qr-1]][queue[qr]]='*';
+		if(ch[queue[ql]][queue[ql+1]+1]=='.')qr+=2,queue[qr-1]=queue[ql],queue[qr]=queue[ql+1]+1,ch[queue[qr-1]][queue[qr]]='*';
+		ch[queue[ql]][queue[ql+1]]='*';
+		ql+=2,ans+=1;
+	}
+	return ans;
+}
+int main()
+{
+	int i,j,ans;
+	while(~scanf("%d%d",&x,&y)&&(x||y))
+	{
+		getchar();
+		for(i=0;i<25;i++)
+			for(j=0;j<25;j++)ch[i][j]='&';
+		for(i=0;i<y;i++)
+		{
+			for(j=0;j<x;j++)
+			{
+				scanf("%c",&ch[i][j]);
+				if(ch[i][j]=='@')xx=i,yy=j;
+			}
+			getchar();
+		}
+		for(i=0;i<1000;i++)queue[i]=-1;
+		queue[0]=xx,queue[1]=yy;
+		ql=0,qr=1;
+		printf("%d\n",bfs());
+	}
+	return 0;
+}
