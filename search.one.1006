@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+char ch[1010][30];
+int visit[1010],i;
+int dfs(char search)
+{
+  int j;
+	if(search=='b') return 1;
+	for(j=0;j<=i;j++)
+	{
+		if(visit[j]==0&&ch[j][strlen(ch[j])-1]==search)
+		{
+			visit[j]=1;
+			if(dfs(ch[j][0])==1)return 1;
+			visit[j]=0;
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	char c[30];
+	int j;
+	i=0;
+	while(gets(ch[i]))
+	{
+		i+=1;
+		while(gets(ch[i]))
+		{
+			if(ch[i][0]=='0')break;
+			i++;
+		}
+		for(j=0;j<1010;j++)visit[j]=0;
+		if(dfs('m'))puts("Yes.");
+		else puts("No.");
+		i=0;
+	}
+	return 0;
+}
