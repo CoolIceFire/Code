@@ -1,0 +1,28 @@
+#include<stdio.h>
+int f(int n)
+{
+    if(((n%4==0)&&(n%100!=0))||(n%400==0))
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    int y,n,t,i,j;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&y,&n);
+        for(i=0;;i++)
+            if(f(y+i)) break;
+        y+=i;
+        j=1;
+        while(j<n)
+        {
+            if(f(y+4)) j++;
+            y+=4;
+        }
+        printf("%d\n",y);
+    }
+    return 0;
+}
