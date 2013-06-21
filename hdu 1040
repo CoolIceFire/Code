@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+int cmp(const void *a,const void *b)
+{
+    return *(int *)a-*(int *)b;
+}
+int main()
+{
+    int n,*a,i,t,j,f;
+    scanf("%d",&n);
+    while(n--)
+    {
+        f=1;
+        scanf("%d",&t);
+        a=(int *)malloc(sizeof(int)*t);
+        i=0,j=t;
+        while(j--)
+            scanf("%d",&a[i++]);
+        qsort(a,t,sizeof(int),cmp);
+        for(i=0;i<t;i++)
+        {
+            if(f)printf("%d",a[i]),f=0;
+            else printf(" %d",a[i]);
+        }
+        puts("");
+        free(a);
+    }
+    return 0;
+}
