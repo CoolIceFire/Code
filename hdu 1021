@@ -1,0 +1,14 @@
+#include <stdio.h>
+int a[8]={1,2,0,2,2,1,0,1};
+int main ()
+{
+    int n;
+    while(~scanf("%d",&n))
+    {
+        n%=8;
+        if(a[n]==0)puts("yes");
+        else puts("no");
+    }
+    return 0 ;
+}
+
