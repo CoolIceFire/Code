@@ -1,0 +1,5 @@
+#include<stdio.h>  
+#include<math.h> 
+main(t){double n;scanf("%d",&t);while(t--){scanf("%lf",&n);
+printf("%d\n",(int)(log10(sqrt(2 * acos(-1.0) * n)) + (n * log10(n/(exp(1.0)))))+1);}
+return 0;}
