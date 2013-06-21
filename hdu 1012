@@ -1,0 +1,27 @@
+#include<stdio.h>
+
+int f(int i)
+{
+    int j,s=1;
+    if(i==0)return 1;
+    for(j=1;j<=i;j++)s*=j;
+    return s;
+}
+int main()
+{
+    int n,i,j;
+    double s;
+    puts("n e");
+    puts("- -----------");
+    puts("0 1");
+    puts("1 2");
+    puts("2 2.5");
+    for(j=3;j<=9;j++)
+    {
+        s=0;
+        for(i=0;i<=j;i++)
+            s+=1.0/f(i);
+        printf("%d %.9lf\n",j,s);
+    }
+    return 0;
+}
