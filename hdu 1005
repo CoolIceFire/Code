@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+int main()
+{
+    
+    int n,a,b,i,f,d1,d2,m,s[120],k;
+    while(scanf("%d %d %d",&a,&b,&n)!=EOF)
+    {
+        d1=d2=1,f=1;
+        if(n>0&&n<3)
+            printf("%d\n",f);
+        else
+        {
+            if(a==0&&b==0&&n==0) ;
+            else
+            {
+                a%=7,b%=7;
+                for(i=3;i<=n;i++)
+                {
+                    f=(a*d1+b*d2)%7;
+                    s[i]=f,d2=d1,d1=f;
+                    for(s[1]=1,s[2]=1,k=2;k<i;k++)
+                    {
+                        if(f==s[k]&&d2==s[k-1])
+                            n=(n-i)%(i-k)+i;
+                    }
+                }
+                printf("%d\n",f);
+            }
+        }
+    }
+    return 0;
+}
