@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+char ch[15][15];
+int visit[15][15];
+int rows,col,entry,loop,steps,x,y;
+void vs()
+{
+  char c;
+	visit[x][y]=1;
+	while(!(x<0||x>=rows||y<0||y>=col))
+	{
+		c=ch[x][y];
+		if(c=='W')y-=1;
+		if(c=='S')x+=1;
+		if(c=='N')x-=1;
+		if(c=='E')y+=1;
+		visit[x][y]+=1;
+		if(visit[x][y]==2)loop+=1;
+		if(visit[x][y]==1)steps+=1;
+		if(visit[x][y]==3)break;
+	}
+}
+int main()
+{
+	int i,j;
+	while(~scanf("%d%d%d",&rows,&col,&entry)&&(rows||col))
+	{
+		getchar();
+		for(i=0;i<rows;i++)
+		{
+			for(j=0;j<col;j++)scanf("%c",&ch[i][j]);
+			getchar();
+		}
+		memset(visit,0,sizeof(visit));
+		x=0,y=entry-1,steps=0,loop=0;
+		vs();
+		if(loop==0)printf("%d step(s) to exit\n",steps);
+		else printf("%d step(s) before a loop of %d step(s)\n",steps-loop+1,loop);
+	}
+	return 0;
+}
