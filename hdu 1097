@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+int main()
+{
+    int t[10];
+    long long a,b,i,f;
+    while(~scanf("%I64d%I64d",&a,&b))
+    {
+        for(i=0;i<10;i++)
+            t[i]=0;
+        a=a%10;
+        t[0]=a;
+        for(i=1;i<10;i++)
+        {
+            t[i]=(t[i-1]*a)%10;
+            if(t[i]==a)
+                break;
+        }
+        b=b%i;
+        if(b==0)
+            printf("%d\n",t[i-1]);
+        else
+            printf("%d\n",t[b-1]);
+    }
+    return 0;
+}
