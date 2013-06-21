@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+int gcd(int a,int b)
+{
+    return b==0?a:gcd(b,a%b);
+}
+int main()
+{
+    int i,j,k,t,*a,x,y;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&i);
+        a=(int *)malloc(sizeof(int)*i);
+        for(k=0;k<i;k++)
+            scanf("%d",&a[k]);
+        for(j=1;j<i;j++)
+        {
+            for(k=0;k<i-j;k++)
+            {
+                a[k]=a[k]/gcd(a[k],a[k+1])*a[k+1];
+            }
+        }
+        printf("%d\n",a[0]);
+        free(a);
+    }
+    return 0;
+}
