@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main()
+{
+    int n,m,s,a;
+    scanf("%d",&n);
+    while(n--)
+    {
+        s=0;
+        scanf("%d",&m);
+        while(m--)
+            scanf("%d",&a),s+=a;
+        printf("%d\n",s);
+        if(n!=0)puts("");
+    }
+    return 0;
+}
