@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node{
+    int a, b ;
+}node ;
+
+node pt[5010] ;
+int dp[5010];
+int cmp(const void *a,const void *b)
+{
+    node *c,*d;
+    c=(node *)a,d=(node *)b;
+    if(c->a!=d->a)return d->a-c->a;
+    return d->b-c->b;
+}
+
+int main()
+{
+    int T,n,i,ans,j;
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d",&n);
+        for(i=0;i<n;i++)
+            scanf("%d%d",&pt[i].a,&pt[i].b);
+        qsort(pt,n,sizeof(node),cmp);
+        dp[0]=1;
+        for(ans=-1,i=1;i<n;i++)
+        {
+            dp[i]=1;
+            for(j=0;j<i;j++)
+            {
+                if(pt[j].b<pt[i].b&&dp[j]+1 > dp[i])
+                     dp[i] = dp[j] + 1 ;
+            }
+            if(dp[i]>ans)ans=dp[i];
+        }
+        printf("%d\n",ans);
+    }
+}
