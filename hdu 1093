@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main()
+{
+    int a,b,c,d,s;
+    scanf("%d",&a);
+    while(a--)
+    {
+        s=0;
+        scanf("%d",&b);
+        while(b--)
+            scanf("%d",&c),s+=c;
+        printf("%d\n",s);
+    }
+    return 0;
+}
