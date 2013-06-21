@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+char arr[1010];
+int main()
+{
+    int t,len,j,k,i;
+    scanf("%d",&t);
+    getchar();
+    while(t--)
+    {
+        gets(arr);
+        len=strlen(arr);
+        arr[len]='\0';
+        j=0;
+        while(j<len)
+        {
+            k=i=j;
+            for(i=j;arr[i]!=' '&&arr[i]!='\0';i++);
+            j=i;
+            for(;i>k;i--)putchar(arr[i-1]);
+            if(j<len)printf(" ");
+            j+=1;
+            k=i=j;
+        }
+        puts("");
+    }
+}
