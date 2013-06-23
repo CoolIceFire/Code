@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int arr[15],i,j,k,m;
+    while(~scanf("%d",&i)&&i!=-1)
+    {
+        k=j=0;
+        arr[j]=i;
+        while(scanf("%d",&i)&&i!=0)
+        {
+            j++,arr[j]=i;
+        }
+        for(i=0;i<j;i++)
+        {
+            for(m=i+1;m<=j;m++)
+            {
+                if((arr[i]*2==arr[m])||((arr[i]/2==arr[m])&&(arr[i]%2==0)))
+                    k++;
+            }
+        }
+        printf("%d\n",k);
+        for(k=0;k<15;k++)arr[k]=0;
+    }
+    return 0;
+}
