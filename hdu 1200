@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<string.h>
+char arr[210];
+int main()
+{
+    int n,i,j;
+    char c;
+    while(~scanf("%d",&n)&&n)
+    {
+        getchar();
+        gets(arr);
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<strlen(arr)/n;j++)
+            {
+                if(j%2==0)printf("%c",arr[n*j+i]);
+                else printf("%c",arr[n*j+n-i-1]);
+            }
+        }
+        puts("");
+        for(i=0;i<210;i++)arr[i]=0;
+    }
+    return 0;
+}
