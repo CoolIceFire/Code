@@ -1,0 +1,30 @@
+#include<stdio.h>
+int f(int a)
+{
+    if((a%4==0&&a%100!=0)||(a%400==0))
+        return 1;
+    else
+        return 0;
+}
+int main()
+{
+    int i,x,y,z,j,s,k;
+    scanf("%d",&i);
+    while(i--)
+    {
+        j=s=0;
+        k=17;
+        scanf("%d-%d-%d",&x,&y,&z);
+        if(y==2&&z==29&&f(x+18)==0)
+            printf("-1\n");
+        else
+        {
+            if(y>2)
+            j=1,k=18;
+            for(;j<=k;j++)
+                s=s+f(x+j);
+            printf("%d\n",s+6570);
+        }
+    }
+    return 0;
+}
