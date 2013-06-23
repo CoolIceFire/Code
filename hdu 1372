@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+int graph[70][70] ;
+int visited[10][10] ;
+int q[1000] ;
+void bfs (int idx)
+{
+    int i, pos ;
+    int front = 0, rear = 0 ;
+    int x, y, xx, yy, step ;
+    int tab[8][2] = {-2, -1, -2, 1, -1, -2, -1, 2,1,-2, 1, 2, 2, -1, 2, 1} ;
+    graph[idx][idx] = 0 ;
+    q[rear++] = idx ;
+    while (front != rear)
+    {
+        pos = q[front++] ;
+        step = graph[idx][pos] ;
+        x = pos/8, y = pos % 8 ;
+        for (i = 0 ; i < 8 ; i++)
+        {
+            xx = x + tab[i][0] ;
+            yy = y + tab[i][1] ;
+            if (xx < 0 || xx >= 8 || yy < 0 || yy >= 8)
+                continue ;
+            if (graph[idx][xx*8+yy] < 100) continue ;
+            graph[idx][xx*8+yy] = step + 1 ;
+            q[rear++] = xx*8+yy ;
+        }
+    }
+}
+int main ()
+{
+    char a,b,c,d ;
+    int i, x1, y1, x2, y2 ;
+    
+    memset (graph, 0x7f, sizeof(graph)) ;
+    while (~scanf ("%c%c %c%c%*c", &a, &b, &c, &d))
+    {
+        x1 = a-'a', y1 = b-'1' ;
+        x2 = c-'a', y2 = d-'1' ;
+        bfs (x1*8+y1) ;
+        printf ("To get from %c%c to %c%c takes %d knight moves.\n",
+            a, b, c, d, graph[x1*8+y1][x2*8+y2]) ;
+    }
+    return 0 ;
+}
