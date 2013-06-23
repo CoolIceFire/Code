@@ -1,0 +1,41 @@
+#include<stdio.h>
+int f(int a)
+{
+    int i;
+    for(i=2;i<a;i++)
+    {
+        if(a%i==0)return 1;
+    }
+    return 0;
+}
+int main()
+{
+    int a,b,i,c,x,y;
+    while(~scanf("%d",&a))
+    {
+        x=y=0;
+        c=b=a/2;
+        if(f(b)==0&&f(c)==0)
+            printf("%d %d\n",b,c);
+        else
+        {
+            b--;
+            while(x+y!=a)
+            {
+                while(f(b))
+                    b--;
+                while(f(c))
+                    c++;
+                x=b,y=c;
+                if(b+c!=a)
+                {
+                    if((a/2-b)>(c-a/2))
+                        c++;
+                    else b--;
+                }
+            }
+            printf("%d %d\n",b,c);
+        }
+    }
+}
+
