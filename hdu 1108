@@ -1,0 +1,29 @@
+#include<stdio.h>
+int main()
+{
+    int m,n,k,s,j;
+    while(~scanf("%d%d",&m,&n))
+    {
+        s=1;
+        if(m>n) k=n;
+        else k=m;
+        if(m%n==0||n%m==0)
+        {
+            m>n?printf("%d\n",m):printf("%d\n",n);
+        }
+        else
+        {
+            for(j=2;j<=k;j++)
+            {
+                if(m%j==0&&n%j==0)
+                {
+                    s*=j,m=m/j,n=n/j;
+                    k=k/j,j=2;
+                }
+                if(j==k) s=s*m*n;
+            }
+            printf("%d\n",s);
+        }
+    }
+    return 0;
+}
