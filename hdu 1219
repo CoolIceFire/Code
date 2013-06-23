@@ -1,0 +1,22 @@
+# include <stdio.h>
+# include <string.h>
+
+
+char str[100010] ;
+int tab[300] ;
+
+
+int main ()
+{
+    int  i;
+    while (gets(str))
+    {
+        memset (tab, 0, sizeof(tab)) ;
+        for (i = 0 ; str[i] ; i++)
+            tab[str[i]]++ ;
+        for (i = 'a' ; i <= 'z' ; i++)
+            printf ("%c:%d\n", i, tab[i]) ;
+        printf ("\n") ;
+    }
+    return 0 ;
+}
