@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+int f(int a)
+{
+    int k,s=2;
+    if(a==0)return 1;
+    for(k=1;k<a;k++)s*=2;
+    return s;
+}
+
+int main()
+{
+    int d,n,j,k,s;
+    scanf("%d",&d);
+    while(d--)
+    {
+        scanf("%d",&n);
+        j=0;
+        for(k=0;;k++)
+        {
+            s=f(k);
+            if(s>n)break;
+            if(n%s==0&&n/s%2==1)
+            {
+                printf("%d %d\n",n/s,k);
+                break;
+            }
+        }
+    }
+    return 0;
+}
