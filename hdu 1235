@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+
+int a[1010], num, n ;
+
+
+int main ()
+{
+    int ans, i ;
+    while (~scanf ("%d", &n) && n)
+    {
+        for (i = 0 ; i < n ; i++)
+            scanf ("%d", &a[i]) ;
+        scanf ("%d", &num) ;
+        ans = 0 ;
+        for (i = 0 ; i < n ; i++)
+            if (a[i] == num) ans++ ;
+        printf ("%d\n", ans) ;
+    }
+    return 0 ;
+}
