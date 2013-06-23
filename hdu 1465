@@ -1,0 +1,14 @@
+# include <stdio.h>
+# include <string.h>
+
+
+long long dp[25] = {0, 0, 1} ;
+int main ()
+{
+    int i ;
+    for(i = 3 ; i <= 20 ; i++)
+        dp[i] = (i-1)*(dp[i-1]+dp[i-2]) ;
+    while (~scanf ("%d", &i))
+        printf ("%I64d\n", dp[i]) ;
+    return 0 ;
+}
