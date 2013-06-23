@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<string.h>
+int ans[50][15];
+int queue[15];
+int input[15];
+int t,n,k;
+void dfs()
+{
+  int i,j,jj,m,sum,flag;
+	queue[0]=-2;
+	i=0,k=0,sum=0,m=0;
+	while(i!=n)
+	{
+		for(;i<n;i++)
+		{
+			if(sum+input[i]<t)
+			{
+				sum+=input[i];
+				queue[m++]=i;
+			}
+			else if(sum+input[i]==t)
+			{
+				queue[m++]=i;
+				sum=t;
+				flag=0;
+				for(j=0;j<k;j++)
+				{
+					for(jj=0;jj<m;jj++)
+					{
+						if(input[ans[j][jj]]!=input[queue[jj]])
+						{
+							flag+=1;
+							break;
+						}
+					}
+				}
+				if(flag==k)
+				{
+					for(jj=0;jj<m;jj++)ans[k][jj]=queue[jj];
+					k++;
+				}
+				break;
+			}
+		}
+		if(queue[m-1]==n-1)sum-=input[queue[m-1]],m-=1;
+		i=queue[m-1]+1,sum-=input[queue[m-1]],m-=1;
+		if(m<0)break;
+	}
+}
+int main()
+{
+	int i,j,flag;
+	while(~scanf("%d%d",&t,&n)&&(t||n))
+	{
+		memset(input,0,sizeof(input));
+		for(i=0;i<n;i++)scanf("%d",&input[i]);
+		memset(queue,0,sizeof(queue));
+		memset(ans,-1,sizeof(ans));
+		dfs();
+		printf("Sums of %d:\n",t);
+		if(k==0)
+		{
+			puts("NONE");
+		}
+		else
+		{
+			for(i=0;i<k;i++)
+			{
+				for(flag=j=0;j<15;j++)
+				{
+					if(ans[i][j]!=-1)
+					{
+						flag==0?flag+=1:printf("+");
+						printf("%d",input[ans[i][j]]);
+					}
+				}
+				printf("\n");
+			}
+		}
+	}
+	return 0;
+}
