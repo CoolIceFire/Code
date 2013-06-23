@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+    int t,n;
+    long long a,b,i;
+    scanf("%d",&t);
+    while(t--)
+    {
+        a=b=0;
+        scanf("%d",&n);
+        while(n--)
+        {
+            scanf("%I64d",&i);
+            if(i>a)
+            {
+                b+=a;
+                a=i;
+            }
+            else b+=i;
+        }
+        if(b-a>-2)puts("Yes");
+        else puts("No");
+    }
+    return 0;
+}
