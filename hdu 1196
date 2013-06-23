@@ -1,0 +1,24 @@
+#include<stdio.h>
+int f(int i)
+{
+    int j,s=1;
+    if(i==0)return 1;
+    for(j=0;j<i;j++)
+        s=s*2;
+    return s;
+}
+int main()
+{
+    int a,i,s;
+    while(~scanf("%d",&a)&&a)
+    {
+        i=0;
+        while((a&0x01)!=1)
+        {
+            i++;
+            a/=2;
+        }
+        printf("%d\n",f(i));
+    }
+
+}
