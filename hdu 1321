@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    int i,len;
+    char c[70];
+    scanf("%d",&i);
+    getchar();
+    while(i--)
+    {
+        gets(c);
+        len=strlen(c);
+        while(len--)
+            printf("%c",c[len]);
+        puts("");
+    }
+    return 0;
+}
