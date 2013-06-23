@@ -1,0 +1,15 @@
+# include <stdio.h>
+int main ()
+{
+    int n, sum ;
+    scanf ("%d", &n) ;
+    while (~scanf ("%d", &n))
+    {
+        sum = n%50 ;
+        n/=50 ;
+        if (n <= 2) sum += 50*n ;
+        else if (n == 5) sum += 50 ;
+        printf ("%d\n", sum) ;
+    }
+    return 0 ;
+}
