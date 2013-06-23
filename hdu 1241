@@ -1,0 +1,42 @@
+#include<stdio.h>
+int m,n;
+char ch[110][110];
+int dfs(int x,int y)
+{
+    int i=x,j=y;
+    if(i<m-1&&(ch[i+1][j]=='@'))ch[i+1][j]='*',dfs(i+1,j);
+    if(i<m-1&&j>0&&ch[i+1][j-1]=='@')ch[i+1][j-1]='*',dfs(i+1,j-1);
+    if(j<n-1&&ch[i][j+1]=='@')ch[i][j+1]='*',dfs(i,j+1);
+    if(j<n-1&&i<m-1&&ch[i+1][j+1]=='@')ch[i+1][j+1]='*',dfs(i+1,j+1);
+    if(i>0&&ch[i-1][j]=='@')ch[i-1][j]='*',dfs(i-1,j);
+    if(i>0&&j<n-1&&ch[i-1][j+1]=='@')ch[i-1][j+1]='*',dfs(i-1,j+1);
+    if(j>0&&ch[i][j-1]=='@')ch[i][j-1]='*',dfs(i,j-1);
+    if(i>0&&j>0&&ch[i-1][j-1]=='@')ch[i-1][j-1]='*',dfs(i-1,j-1);
+    return 1;
+}
+int main()
+{
+    int i,j,ans;
+    while (~scanf("%d%d",&m,&n)&&(m||n))
+    {
+        getchar();
+        for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)scanf("%c",&ch[i][j]);
+            getchar();
+        }
+        for(i=0;i<m;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                if(ch[i][j]=='@')
+                    dfs(i,j),ch[i][j]='@';
+            }
+        }
+        for(ans=0,i=0;i<m;i++)
+            for(j=0;j<n;j++)
+                if(ch[i][j]=='@')ans+=1;
+        printf("%d\n",ans);
+    }
+    return 0;
+}
