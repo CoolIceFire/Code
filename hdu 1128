@@ -1,0 +1,23 @@
+#include <stdio.h>
+int dp[1000010] ;
+int d(int n)
+{
+    int sum = 0, nn = n ;
+    while (nn)
+    {
+        sum += nn%10 ;
+        nn /= 10 ;
+    }
+    return n + sum ;
+}
+int main ()
+{
+    int i, n ;
+    for (i = 1 ;i <= 1000000 ; i++)
+    {
+        n = d(i) ;
+        if (n <= 1000000 && n >= i) dp[n] = 1 ;
+        if (dp[i] == 0) printf ("%d\n", i) ;
+    }
+    return 0 ;
+}
