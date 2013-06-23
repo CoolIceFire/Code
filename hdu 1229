@@ -1,0 +1,21 @@
+#include<stdio.h>
+int main()
+{
+    int x,y,k,i,s,a,b,f;
+    while(~scanf("%d%d%d",&x,&y,&k)&&(x||y))
+    {
+        f=0,s=x+y;
+        for(i=0;i<k;i++)
+        {
+            a=x%10,b=y%10;
+            if(a!=b) 
+            {
+                f=1;break;
+            }
+            x=(x-a)/10,y=(y-b)/10;
+        }
+        if(f)printf("%d\n",s);
+        else printf("-1\n");
+    }
+    return 0;
+}
