@@ -1,0 +1,32 @@
+#include <stdio.h>
+int a[1010] ;
+int dp[1010] ;
+int n ;
+int max(int a, int b){return a>b?a:b;}
+int lis()
+{
+    int i, j, ans = 0 ;
+    dp[0] = 1 ;
+    for (i = 1 ;i < n ; i++)
+    {
+        dp[i] = 1 ;
+        for(j = 0 ; j < i ; j++)
+        {
+            if (a[j] > a[i]) continue ;
+            dp[i] = max(dp[i], dp[j]+1) ;
+        }
+        if (dp[i] > ans) ans = dp[i] ;
+    }
+    return ans ;
+}
+int main ()
+{
+    int i ;
+    while (~scanf ("%d", &n))
+    {
+        for (i = 0 ; i < n ; i++)
+            scanf ("%d", &a[i]) ;
+        printf ("%d\n", lis()) ;
+    }
+    return 0 ;
+}
