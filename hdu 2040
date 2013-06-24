@@ -1,0 +1,23 @@
+#include<stdio.h>
+int main()
+{
+    int n,a,b,k,s;
+    scanf("%d",&n);
+    while(n--)
+    {
+        s=0;
+        scanf("%d%d",&a,&b);
+        for(k=1;k<a;k++)
+            if(a%k==0) s+=k; 
+        if(s==b)
+        {
+            s=0;
+            for(k=1;k<b;k++)
+                if(b%k==0) s+=k;
+            if(s==a) puts("YES");
+            else puts("NO");
+        }
+        else puts("NO");
+    }
+    return 0;
+}
