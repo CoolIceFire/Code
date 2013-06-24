@@ -1,0 +1,21 @@
+# include <stdio.h>
+# include <math.h>
+
+
+int main ()
+{
+    int T ;
+    double x1,y1,x2,y2,s1,s2,a1,a2, a ;
+    scanf ("%d", &T) ;
+    while (T--)
+    {
+        scanf ("%lf%lf%lf%lf", &x1, &y1, &x2, &y2) ;
+        s1 = sqrt(x1*x1+y1*y1) ;
+        s2 = sqrt(x2*x2+y2*y2) ;
+        a1 = acos(x1/s1)/acos(-1) * 180 ;
+        a2 = acos(x2/s2)/acos(-1) * 180 ;
+        a = fabs(a1-a2) ;
+        printf ("%.2lf\n", a) ;
+    }
+    
+}
