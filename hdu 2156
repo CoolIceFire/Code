@@ -1,0 +1,14 @@
+#include<stdio.h>
+int main()
+{
+    int N,j;
+    double s;
+    while(~scanf("%d",&N)&&N)
+    {
+        s=0.0;
+        for(j=2;j<=N;j++)
+            s=s+1.0*(N-j+1)/j;
+        s=s*2+N;
+        printf("%.2lf\n",s);
+    }
+}
