@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+char c[60];
+int main()
+{
+    int i,len,T;
+    char cc;
+    scanf("%d",&T);
+    getchar();
+    while(T--)
+    {
+        gets(c);
+        len=strlen(c);
+        c[len]='\0';
+        for(i=0;i<len;i++)
+        {
+            if(c[i]<'a')c[i]+=32;
+            if(c[i]=='a'||c[i]=='e'||c[i]=='i'||c[i]=='o'||c[i]=='u')
+            {
+                c[i]-=32;
+            }
+        }
+        puts(c);
+    }
+}
