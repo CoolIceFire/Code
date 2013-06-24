@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<string.h>
+char c[55];
+int main()
+{
+    int n,len,i;
+    scanf("%d",&n);
+    getchar();
+    while(n--)
+    {
+        gets(c);
+        i=0;
+        len=strlen(c);
+        if((c[0]>='a'&&c[0]<='z')||(c[0]>='A'&&c[0]<='Z')||c[0]=='_')
+        {
+            for(i=0;i<len;i++)
+            {
+                if((c[i]>='a'&&c[i]<='z')||(c[i]>='A'&&c[i]<='Z')||c[i]=='_'||(c[i]>='0'&&c[i]<='9'));
+                else break;
+            }
+        }
+        if(i==len)puts("yes");
+        else puts("no");
+    }
+}
