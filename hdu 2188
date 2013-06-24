@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main()
+{
+    int c,n,m;
+    scanf("%d",&c);
+    while(c--)
+    {
+        scanf("%d%d",&n,&m);
+        if(n%(1+m)==0)puts("Rabbit");
+        else puts("Grass");
+    }
+    return 0;
+}
