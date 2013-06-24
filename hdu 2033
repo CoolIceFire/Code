@@ -1,0 +1,17 @@
+#include<stdio.h>
+int main()
+{
+    int a,b,c,d,e,f,m,n;
+    while(~scanf("%d",&m))
+    {
+        while(m--)
+        {
+            scanf("%d%d%d%d%d%d",&a,&b,&c,&d,&e,&f);
+            n=(c+f)/60,c=(c+f)%60;
+            b+=n,n=(b+e)/60,b=(b+e)%60;
+            a=a+d+n;
+            printf("%d %d %d\n",a,b,c);
+        }
+    }
+    return 0;
+}
