@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<string.h>
+char ch[55];
+int main()
+{
+    int M,len,f1,f2,f3,f4,i;
+    scanf("%d",&M);
+    getchar();
+    while(M--)
+    {
+        f1=f2=f3=f4=0;
+        gets(ch);
+        len=strlen(ch);
+        if(len>=8&&len<=16)
+        {
+            for(i=0;i<len;i++)
+            {
+                if(ch[i]>='A'&&ch[i]<='Z')f1=1;
+                if(ch[i]>='a'&&ch[i]<='z')f2=1;
+                if(ch[i]>='0'&&ch[i]<='9')f3=1;
+                if(ch[i]=='~'||ch[i]=='!'||ch[i]=='@'||ch[i]=='#'||ch[i]=='$'||ch[i]=='%'||ch[i]=='^')f4=1;
+            }
+            if((f1+f2+f3+f4)>2)puts("YES");
+            else puts("NO");
+        }
+        else puts("NO");
+    }
+    return 0;
+}
