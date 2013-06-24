@@ -1,0 +1,15 @@
+#include<stdio.h>
+int gcd(int a,int b)
+{
+    return a%b?gcd(b,a%b):b;
+}
+int main()
+{
+    int N,M;
+    while(~scanf("%d%d",&N,&M)&&~M&&~N)
+    {
+        if(gcd(N,M)==1)puts("YES");
+        else puts("POOR Haha");
+    }
+    return 0;
+}
