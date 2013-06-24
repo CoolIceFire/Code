@@ -1,0 +1,40 @@
+#include<stdio.h>
+int main()
+{
+    int a,b,i,j,k,m;
+    while(~scanf("%d%d",&a,&b)&&(a||b))
+    {
+        a*=100;
+        m=a%b;
+        if(m==0)
+        {
+            printf("00");
+            for(k=1;;k++)
+            {
+                if(k*b>=100)break;
+                else
+                {
+                    if(k*b<10)printf(" 0%d",k*b);
+                    else printf(" %d",k*b);
+                }
+            }
+        }
+        else
+        {
+            m=b-m;
+            if(m<10)printf("0%d",m);
+            else printf("%d",m);
+            for(k=1;;k++)
+            {
+                if(m+k*b>=100)break;
+                else
+                {
+                    if((m+k*b)<10)printf(" 0%d",m+b*k);
+                    else printf(" %d",m+b*k);
+                }
+            }
+        }
+        puts("");
+    }
+    return 0;
+}
