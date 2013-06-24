@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main()
+{
+    int m,n,s,k;
+    while(~scanf("%d%d",&m,&n)&&m!=0&&n!=0)
+    {
+        s=m;
+        for(k=1;k<n;k++)
+        {
+            s=(s*m)%1000;
+        }
+        printf("%d\n",s);
+    }
+    return 0;
+}
