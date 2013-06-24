@@ -1,0 +1,41 @@
+# include <stdio.h>
+# include <stdlib.h>
+
+
+typedef struct node{
+    int s, t ;
+}node ;
+
+
+node a[110] ;
+
+
+int cmp(const void*a, const void *b)
+{
+    node *p = (node*)a, *q = (node*)b ;
+    if (p->t != q->t) return p->t - q->t ;
+    return p->s - q->s ;
+}
+
+
+int main ()
+{
+    int i, n, end, ans ;
+    while (~scanf ("%d", &n) && n)
+    {
+        for (i = 0 ; i < n ; i++)
+            scanf ("%d%d", &a[i].s, &a[i].t) ;
+        qsort(a, n, sizeof(node), cmp) ;
+        end = 0 ;
+        ans = 0 ;
+        for (i = 0 ; i < n ; i++)
+        {
+            if (a[i].s < end) continue ;
+            ans++ ;
+            end = a[i].t ;
+        }
+        printf ("%d\n", ans) ;
+    }
+    
+    return 0 ;
+}
