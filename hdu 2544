@@ -1,0 +1,60 @@
+# include <stdio.h>
+# include <string.h>
+
+# define N 105
+# define INF 100005
+
+int n, m;
+int w[N][N];
+
+int min(int x, int y)
+{
+    return (x<y ? x:y);
+}
+
+void init(void)
+{
+    int i, j, u, v, t;
+    
+    for (i = 1; i <= n; ++i)
+    for (j = 1; j <= n; ++j)
+    {
+        w[i][j] = INF;
+    }
+
+    for (i = 0; i < m; ++i)
+    {
+        scanf("%d%d%d", &u, &v, &t);
+        if (t < w[u][v]) w[u][v] = w[v][u] = t;
+    }
+}
+
+void solve(void)
+{
+    int d[N], i, m, x, j;
+    char v[N];
+    
+    memset(v, 0, sizeof(v));
+    for (d[1] = 0, i = 2; i <= n; ++i)
+        d[i] = INF;
+    for (i = 1; i <= n; ++i)
+    {
+        m = INF;
+        for (j = 1; j <= n; ++j) if (!v[j] && d[j]<=m) m = d[x = j];
+        if (x == n) break;
+        v[x] = 1;
+        for (j = 1; j <= n; ++j) d[j] = min(d[j], d[x]+w[x][j]);
+    }
+    printf("%d\n", d[n]);
+}
+
+int main()
+{    
+    while (scanf("%d%d", &n, &m), n&&m)
+    {
+        init();
+        solve();
+    }
+
+    return 0;
+}
