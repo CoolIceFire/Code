@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+    int n,s,a;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d",&a);
+        s=0;
+        while(a)
+        {
+            if(a%2==1)s+=1;
+            a/=2;
+        }
+        printf("%d\n",s);
+    }
+    return 0;
+}
