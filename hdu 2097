@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main()
+{
+    int m,s1,s2,s3;
+    while(~scanf("%d",&m)&&m!=0)
+    {
+        s1=m/1000+m%10+(m%100-m%10)/10+(m/100)%10;
+        s2=m/4096+(m%4096)/256+(m%256)/16+m%16;
+        s3=m/1728+(m%1728)/144+(m%144)/12+m%12;
+        if(s1==s2&&s1==s3)
+            printf("%d is a Sky Number.\n",m);
+        else
+            printf("%d is not a Sky Number.\n",m);
+    }
+    return 0;
+}
