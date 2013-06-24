@@ -1,0 +1,8 @@
+# include <stdio.h>
+int main()
+{
+    int m,n;
+    while(~scanf("%d%d",&m,&n))
+        printf("%.2lf\n",1.0/m);
+    return 0;
+}
