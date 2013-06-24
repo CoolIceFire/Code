@@ -1,0 +1,34 @@
+# include <stdio.h>
+
+
+# define INF 0x7f7f7f7f
+
+
+int flag ;
+
+
+void output (int num)
+{
+    if (flag == 0) flag = 1;
+    else putchar (' ') ;
+    printf ("%d", num) ;
+}
+
+
+int main ()
+{
+    int n, m, num ;
+    while (~scanf ("%d%d", &n, &m) && (n||m))
+    {
+        flag = 0 ;
+        while (n--)
+        {
+            scanf("%d", &num) ;
+            if (m<num) output(m), output(num),m=INF;
+            else output(num) ;
+        }
+        if(m != INF) output(m) ;
+        puts ("") ;
+    }
+    return 0 ;
+}
