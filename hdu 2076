@@ -1,0 +1,23 @@
+# include <stdio.h>
+# include <math.h>
+
+
+int main ()
+{
+    int T, h,m,s,a ;
+    double hh, mm ;
+    double arg ;
+    scanf ("%d", &T) ;
+    while (T--)
+    {
+        scanf ("%d%d%d", &h, &m, &s) ;
+        h %= 12 ;
+        mm = m + s/60.0 ;
+        hh = h + mm/60.0 ;
+        arg = fabs(hh * 30 - mm * 6) ;
+        if (arg > 180) arg = 360 - arg ;
+        a = arg ;
+        printf ("%d\n", a) ;
+    }
+    return 0 ;
+}
