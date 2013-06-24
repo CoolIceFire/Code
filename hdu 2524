@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main()
+{
+    int m,n,k,s;
+    scanf("%d",&k);
+    while(k--)
+    {
+        scanf("%d%d",&m,&n);
+        s=0;
+        s=(1+n)*n/2;
+        s=s*(1+m)*m/2;
+        printf("%d\n",s);
+    }
+    return 0;
+}
