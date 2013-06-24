@@ -1,0 +1,18 @@
+#include <stdio.h>
+int main()
+{
+    int n,s,m,i;
+    i=0;
+    while(~scanf("%d",&n)&&n>0)
+    {
+        i+=1;
+        s=0;
+        while(n--)
+        {
+            scanf("%d",&m);
+            s+=m;
+        }
+        printf("Sum of #%d is %d\n",i,s);
+    }
+    return 0;
+}
