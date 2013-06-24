@@ -1,0 +1,31 @@
+#include<string.h>
+#include<stdio.h>
+int main()
+{
+    int arr[100],len,i,j;
+    char c[100],d;
+    while(gets(c))
+    {
+        memset(arr,0,sizeof(arr));
+        len=strlen(c);
+        d=c[0],arr[0]=1;
+        for(i=1;i<len;i++)
+        {
+            if(d<c[i])
+            {
+                for(j=0;j<i;j++)
+                    arr[j]=0;
+                d=c[i],arr[i]=1;
+            }
+            else if(d==c[i]) arr[i]=1;
+        }
+        for(i=0;i<len;i++)
+        {
+            printf("%c",c[i]);
+            if(arr[i])printf("(max)");
+        }
+        puts("");
+        memset(c,0,sizeof(c));
+    }
+    return 0;
+}
