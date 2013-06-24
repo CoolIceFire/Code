@@ -1,0 +1,26 @@
+# include <stdio.h>
+
+
+void output (int n, int r)
+{
+    char tab[] = "0123456789ABCDEFGHIJK" ;
+    if (n == 0) return ;
+    output (n/r,r) ;
+    putchar (tab[n%r]) ;
+}
+
+
+int main ()
+{
+    int n, r ;
+    while (~scanf ("%d%d", &n, &r))
+    {
+        if (n<0){
+            putchar('-') ;
+            n = -n ;
+        }
+        output (n, r) ;
+        printf ("\n") ;
+    }
+    return 0 ;
+}
