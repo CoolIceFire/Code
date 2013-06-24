@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+    int a,b,c,d,k=0,sum;
+    while(scanf("%d/%d/%d",&a,&b,&c)!=EOF)
+    {
+        d=0,sum=0;
+        if((a%4==0&&a/10==0)||(a%400==0))
+            d=1;
+        for(k=1;k<b;k++)
+        {
+            if(k==1||k==3||k==5||k==7||k==8||k==10||k==12)
+                sum+=31;
+            else
+            {
+                if(k==2)
+                    sum+=(28+d);
+                else
+                    sum+=30;
+            }
+        }
+        printf("%d\n",sum+c);
+    }
+    return 0;
+}
