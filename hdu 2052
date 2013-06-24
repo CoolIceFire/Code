@@ -1,0 +1,27 @@
+#include<stdio.h>
+int main()
+{
+    int n,m,j;
+    while(~scanf("%d%d",&n,&m))
+    {
+        j=n;
+        printf("+");
+        while(j--)
+            printf("-");
+        puts("+");
+        while(m--)
+        {
+            j=n;
+            printf("|");
+            while(j--)printf(" ");
+            puts("|");
+        }
+        j=n;
+        printf("+");
+        while(j--)
+            printf("-");
+        puts("+");
+        puts("");
+    }
+    return 0;
+}
