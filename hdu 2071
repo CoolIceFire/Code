@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main()
+{
+    int m,n;
+    double a,b;
+    scanf("%d",&m);
+    while(m--)
+    {
+        a=0.0;
+        scanf("%d",&n);
+        while(n--)
+        {
+            scanf("%lf",&b);
+            if(b>a) a=b;
+        }
+        printf("%.2lf\n",a);
+    }
+    return 0;
+}
