@@ -1,0 +1,24 @@
+# include <stdio.h>
+# include <string.h>
+
+
+int test(char str[])
+{
+    int i, len = strlen(str) ;
+    for (i = 0 ; i < len/2 ; i++)
+        if (str[i] != str[len-1-i]) return 0 ;
+    return 1 ;
+}
+
+
+int main ()
+{
+    int nCase = 1 ;
+    char str[60] ;
+    while (gets (str))
+    {
+        if (strcmp(str, "STOP")==0) break ;
+        printf ("#%d: %s\n", nCase++, test(str) ? "YES" : "NO") ;
+    }
+    return 0 ;
+}
