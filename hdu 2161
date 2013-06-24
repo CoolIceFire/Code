@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<math.h>
+int f(int a)
+{
+    int i;
+    if(a<2)return 0;
+    for(i=2;i<sqrt((double)a)+1;i++)
+        if(a%i==0)return 0;
+    return 1;
+}
+int main()
+{
+    int i=0,a;
+    while(~scanf("%d",&a)&&a>0)
+    {
+        i++;
+        if(f(a)==0)printf("%d: no\n",i);
+        else printf("%d: yes\n",i);
+    }
+    return 0;
+}
+
