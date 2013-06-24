@@ -1,0 +1,17 @@
+#include<stdio.h>
+int main()
+{
+    int m,n,j,s;
+    while(~scanf("%d",&m))
+    {
+        while (m--)
+        {
+            s=3;
+            scanf("%d",&n);
+            for(j=1;j<=n;j++)
+                s=(s-1)*2;
+            printf("%d\n",s);
+        }
+    }
+    return 0;
+}
