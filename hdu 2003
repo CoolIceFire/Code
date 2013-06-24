@@ -1,0 +1,11 @@
+#define PI 3.1415927
+#include <stdio.h>
+int main()
+{
+    double r;
+    while(scanf("%lf", &r)!= EOF)
+    {
+        printf("%.3lf\n", (double)(4*PI*r*r*r/3));
+    }
+    return 0;
+}
