@@ -1,0 +1,17 @@
+# include <stdio.h>
+char str[110] ;
+int main ()
+{
+    int i ;
+    while (gets(str))
+    {
+        for (i = 0 ; str[i] ; i++)
+        {
+            if (i == 0 || (str[i-1] == ' ' && str[i] != ' '))
+                putchar (str[i] & 0xDF) ;
+            else putchar (str[i]) ;
+        }
+        putchar ('\n') ;
+    }
+    return 0 ;
+}
