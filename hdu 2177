@@ -1,0 +1,65 @@
+#include<iostream>  
+using namespace std;  
+#include<math.h>  
+  
+long int m[1000005],n[1000005];  
+  
+long int binaryCheck(long int check[],long int value,long int left,long int right){  
+    long int mid=(left+right)/2;  
+    if(value==check[mid])  
+        return mid;  
+    if(left>=right)  
+        return -1;  
+    if(value>check[mid])  
+        binaryCheck(check,value,mid+1,right);  
+    else  
+        binaryCheck(check,value,left,mid);  
+}  
+  
+int Wythoff(int a,int b)  
+{  
+     int t;  
+     if(a>b)  
+     {  
+          t=a;a=b;b=t;  
+     }  
+     double temp=(1+sqrt(5.0))/2;  
+     if(a==int((b-a)*temp))  
+          return 0;  
+     else  
+          return 1;  
+}  
+  
+int main()  
+{  
+    double gold=((1+sqrt(5.0))/2);  
+    long int i,a,b,k;  
+  
+    for(i=0;i<=1000000;i++)  
+    {  
+        m[i]=long int(i*gold);  
+        n[i]=m[i]+i;  
+    }  
+    while(scanf("%ld%ld",&a,&b)!=EOF&&(a||b)){  
+        if(Wythoff(a,b))//判断赢或输  
+            printf("1\n");  
+        else{  
+            printf("0\n");  
+            continue;  
+        }  
+        //计算a的位置  
+        printf("%ld %ld\n",m[b-a],n[b-a]);//同时减  
+        //减一方  
+        k=binaryCheck(m,a,0,1000000);  
+        if(k==-1){  
+            k=binaryCheck(n,a,0,1000000);  
+            if(b>m[k])  
+                printf("%ld %ld\n",m[k],a);  
+        }else{  
+            if(b>n[k])  
+                printf("%ld %ld\n",a,n[k]);  
+        }  
+    }  
+  
+    return 0;  
+}  
