@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int n;
+    float m,a;
+    while(scanf("%f%d",&m,&n)!=EOF)
+    {
+        a=0.0;
+        while(n--)
+        {
+            a+=m;
+            m=sqrt((float)m);
+        
+        }
+        printf("%.2f\n",a);
+    }
+}
+
