@@ -1,0 +1,14 @@
+#include<stdio.h>
+long long arr[42]={0,3,9,21};
+int main()
+{
+    int i,c;
+    for(i=4;i<42;i++)arr[i]=2*arr[i-1]+arr[i-2];
+    scanf("%d",&c);
+    while(c--)
+    {
+        scanf("%d",&i);
+        printf("%I64d\n",arr[i]);
+    }
+    return 0;
+}
