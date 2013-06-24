@@ -1,0 +1,15 @@
+#include <stdio.h>
+int a[20]={0,1,2};
+int main()
+{
+    int n,m;
+    for(n=3;n<20;n++)
+        a[n]=a[n-1]+a[n-2];
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d",&m);
+        printf("%d\n",a[m]);
+    }
+    return 0;
+}
