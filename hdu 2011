@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main()
+{
+    int n,m,k;
+    double s;
+    scanf("%d",&n);
+    while(n--)
+    {
+        s=0.0;
+        scanf("%d",&m);
+        for(k=1;k<=m;k++)
+        {
+            if(k%2) s+=1.0/k;
+            else s-=1.0/k;
+        }
+        printf("%.2lf\n",s);
+    }
+    return 0;
+}
