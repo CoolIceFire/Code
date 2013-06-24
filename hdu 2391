@@ -1,0 +1,32 @@
+#include<stdio.h>
+int dp[1010][1010];
+int max(int a,int b)
+{
+    if(a>b)return a;
+    return b;
+}
+int main()
+{
+    int t,r,c,j,k,temp,i=0;
+    for(t=0;t<1010;t++)dp[t][0]=dp[0][t]=0;
+    scanf("%d",&t);
+    while(t--)
+    {
+        i+=1;
+        scanf("%d%d",&r,&c);
+        for(j=1;j<=r;j++)
+            for(k=1;k<=c;k++)scanf("%d",&dp[j][k]);
+        for(j=1;j<=r;j++)
+        {
+            for(k=1;k<=c;k++)
+            {
+                temp=dp[j][k];
+                dp[j][k]=max(temp+dp[j][k-1],temp+dp[j-1][k-1]);
+                dp[j][k]=max(dp[j][k],temp+dp[j-1][k]);
+            }
+        }
+        printf("Scenario #%d:\n%d\n\n",i,dp[r][c]);
+    }
+    return 0;
+}
+
