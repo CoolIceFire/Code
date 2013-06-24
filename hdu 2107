@@ -1,0 +1,16 @@
+# include <stdio.h>
+int main ()
+{
+    int a,b,n;
+    while(~scanf("%d",&n)&&n)
+    {
+        b=0;
+        while(n--)
+        {
+            scanf("%d",&a);
+            if(a>b)b=a;
+        }
+        printf("%d\n",b);
+    }
+    return 0 ;
+}
