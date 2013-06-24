@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+char ch[10000];
+int main()
+{
+    int t,n,i,len;
+    scanf("%d",&t);
+    getchar();
+    while(t--)
+    {
+        memset(ch,0,10000);
+        scanf("%s %d",ch,&n);
+        getchar();
+        len=strlen(ch);
+        for(i=0;;i++)
+        {
+            if(ch[i]=='.')
+            {
+                if(i+n>=len)printf("0\n");
+                else
+                    printf("%c\n",ch[i+n]);
+                break;
+            }
+        }
+    }
+    return 0;
+}
