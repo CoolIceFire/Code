@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<string.h>
+
+char tab[15][15];
+int main()
+{
+    int n,m,i,j,a,b;
+    char c;
+    while(~scanf("%d%d",&n,&m))
+    {
+        getchar();
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+                scanf("%c",&tab[i][j]);
+            getchar();
+        }
+        if(m<0)m=0-m,m=4-m%4;
+        else m=m%4;
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<n;j++)
+            {
+                if(m==0||m==4)a=i,b=j;
+                if(m==1)a=n-j-1,b=i;
+                if(m==2)a=n-i-1,b=n-j-1;
+                if(m==3)a=j,b=n-i-1;
+                putchar(tab[a][b]);
+            }
+            puts("");
+        }
+        memset(tab,0,sizeof(tab));
+    }
+}
