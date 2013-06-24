@@ -1,0 +1,12 @@
+# include <stdio.h>
+int main ()
+{
+    int a,b,n;
+    while(~scanf("%d%d",&a,&b))
+    {
+        a=a%86,b=b%86;
+        if((a+b)%86==0)puts("yes");
+        else puts("no");
+    }
+    return 0 ;
+}
