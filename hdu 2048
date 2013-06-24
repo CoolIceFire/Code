@@ -1,0 +1,16 @@
+# include <stdio.h>
+long long dp[25] = {0, 0, 1} ;
+long long fac[25]={1,1,2};
+int main ()
+{
+    int i;
+    for(i = 3 ; i <= 20 ; i++)
+    {
+        dp[i] = (i-1)*(dp[i-1]+dp[i-2]) ;
+        fac[i]=fac[i-1]*i;
+    }
+    scanf("%d",&i);
+    while(~scanf("%d",&i))
+        printf("%.2lf%%\n",1.0*dp[i]/fac[i]*100.0);
+    return 0 ;
+}
