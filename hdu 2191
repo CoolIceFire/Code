@@ -1,0 +1,32 @@
+# include <stdio.h>
+# include <string.h>
+ 
+int dp[110] ;
+ 
+int main ()
+{
+     int T, ans, n, m ;
+     int p, h, c, i, j ;
+     scanf ("%d", &T) ;
+     while (T--)
+     {
+         scanf ("%d%d", &m, &n) ;
+         memset (dp, 0, sizeof(dp)) ;
+         ans = 0 ;
+         while (n--)
+         {
+             scanf ("%d%d%d", &p, &h, &c) ;
+             for(i = m ; i>=0 ; i--)
+             {
+                 for(j = 1 ; j <= c && i+j*p<=m ;j++)
+                 {
+                     if (dp[i+j*p] < dp[i]+j*h)
+                         dp[i+j*p] = dp[i]+j*h ;
+                     if (dp[i+j*p] > ans) ans = dp[i+j*p]  ;
+                 }
+             }
+         }
+         printf ("%d\n", ans) ;
+     }
+     return 0 ;
+ }
