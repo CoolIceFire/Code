@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+    int a,f=1,s;
+    while(~scanf("%d",&a))
+    {
+        s=0;
+        while(a/10)
+        {
+            if(a%2==0)s+=a%10;
+            a/=10;
+        }
+        if(a%2==0)s+=a;
+        if(f)printf("%d\n",s),f=0;
+        else printf("\n%d\n",s);
+    }
+    return 0;
+}
