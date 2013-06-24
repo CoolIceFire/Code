@@ -1,0 +1,27 @@
+# include <stdio.h>
+# include <stdlib.h>
+int cmp(const void *a, const void *b)
+{
+    return *(int*)a - *(int*)b ;
+}
+int a[110], b[110] ;
+int main ()
+{
+    int i, cnt, flag ;
+    int n, m ;
+    while (~scanf ("%d%d", &n, &m) && (n||m))
+    {
+        for (i = 0 ; i < n ; i++)
+            scanf ("%d", a+i) ;
+        for (i = 0 ; i < m ; i++)
+            scanf ("%d", b+i) ;
+        qsort (a, n, sizeof(int), cmp) ;
+        qsort (b, m, sizeof(int), cmp) ;
+        flag = 0 ;
+        for (i = 0 ; i < n ; i++)
+            if (NULL == bsearch (a+i, b, m, sizeof(int), cmp))
+                flag = printf ("%d ", a[i]) ;
+        printf (flag == 0 ? "NULL\n" : "\n") ;
+    }
+    return 0 ;
+}
