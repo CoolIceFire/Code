@@ -1,0 +1,12 @@
+# include <stdio.h>
+long long dp[50] = {0, 1, 1} ;
+int main ()
+{
+    int i, n ;
+    for (i = 3 ; i <= 40 ; i++)
+        dp[i] = dp[i-1]+dp[i-2] ;
+    scanf ("%d", &n) ;
+    while (~scanf ("%d", &n))
+        printf ("%I64d\n", dp[n]) ;
+    return 0 ;
+}
