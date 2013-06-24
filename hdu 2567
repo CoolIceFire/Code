@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<string.h>
+char a[55],b[55];
+int main()
+{
+    int n,len1,i;
+    scanf("%d",&n);
+    getchar();
+    while(n--)
+    {
+        gets(a);
+        gets(b);
+        len1=strlen(a);
+        for(i=0;i<len1/2;i++)putchar(a[i]);
+        printf("%s",b);
+        for(i=len1/2;i<len1;i++)putchar(a[i]);
+        puts("");
+    }
+    return 0;
+}
