@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main()
+{
+    int n,m;
+    int a[40],i;
+    while(~scanf("%d",&n))
+    {
+        i=0;
+        while(n/2)
+        {
+            a[i]=n%2,i++;
+            n/=2;
+        }
+        a[i]=n%2,i++;
+        for(m=0;m<i;m++)
+            printf("%d",a[i-m-1]);
+        puts("");
+    }
+    return 0;
+}
