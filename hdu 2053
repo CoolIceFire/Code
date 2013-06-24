@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+    int m,n,a,j;
+    while(~scanf("%d",&m))
+    {
+        a=0;
+        for(n=1;n<=m;n++)
+        {
+            if(m%n==0)
+            {
+                    if(a==0)a=1;
+                    else a=0;
+            }
+        }
+        printf("%d\n",a);
+    }
+}
