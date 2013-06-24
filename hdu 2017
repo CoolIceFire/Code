@@ -1,0 +1,19 @@
+# include <stdio.h>
+
+
+char str[1010] ;
+
+
+int main ()
+{
+    int i, sum ;
+    scanf ("%d", &i) ;
+    getchar () ;
+    while (gets(str))
+    {
+        for (sum = 0, i = 0 ; str[i] ; i++)
+            if (str[i] >= '0' && str[i] <= '9') sum++ ;
+        printf ("%d\n", sum) ;
+    }
+    return 0 ;
+}
