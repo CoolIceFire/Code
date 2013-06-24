@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<stdlib.h>
+int arr[610];
+int cmp(const void *a,const void *b)
+{
+    return *(int *)b-*(int *)a;
+}
+int main()
+{
+    int L,N,i,s;
+    while(~scanf("%d%d",&L,&N))
+    {
+        for(i=0;i<N;i++)scanf("%d",&arr[i]);
+        qsort(arr,N,sizeof(int),cmp);
+        for(s=i=0;i<N;i++)
+        {
+            s+=arr[i];
+            if(s>=L)break;
+        }
+        if(s>=L)printf("%d\n",i+1);
+        else puts("impossible");
+    }
+    return 0;
+}
