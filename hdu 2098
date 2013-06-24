@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<math.h>
+int fun(int a)
+{
+    int i;
+    if(a<2)return 0;
+    for(i=2;i<=sqrt((double)a)+1;i++)
+        if(a%i==0) return 0;
+    return 1;
+}
+int main()
+{
+    int a,i,s;
+    while(scanf("%d",&a)&&a)
+    {
+        s=0;
+        for(i=2;i<a/2;i++)
+            if(fun(i)&&(fun(a-i)))s++;
+        printf("%d\n",s);
+    }
+    return 0;
+}
