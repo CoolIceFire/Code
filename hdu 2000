@@ -1,0 +1,12 @@
+#include<stdio.h>
+int main()
+{
+    char a,b,c;
+    while(~scanf("%c%c%c",&a,&b,&c))
+    {
+        getchar();
+        a<b?a<c?b<c?printf("%c %c %c",a,b,c):printf("%c %c %c",a,c,b):printf("%c %c %c",c,a,b):b>c?printf("%c %c %c",c,b,a):a>c?printf("%c %c %c",b,c,a):printf("%c %c %c",b,a,c);
+        puts("");
+    }
+    return 0;
+}
