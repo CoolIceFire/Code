@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+char ch1[400],ch2[100];
+int main()
+{
+    int len,i;
+    char c[30],cc;
+    while(gets(c))
+    {
+        cc='a';
+        for(i=0;i<26;i++)
+        {
+            ch1[cc]=c[i];
+            ch1[cc-32]=c[i]-32;
+            cc+=1;
+        }
+        gets(ch2);
+        len=strlen(ch2);
+        for(i=0;i<len;i++)
+        {
+            if((ch2[i]>='a'&&ch2[i]<='z')||(ch2[i]>='A'&&ch2[i]<='Z'))
+                putchar(ch1[ch2[i]]);
+            else putchar(ch2[i]);
+        }
+        puts("");
+    }
+    return 0;
+}
