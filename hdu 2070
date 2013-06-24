@@ -1,0 +1,11 @@
+#include<stdio.h>
+long long a[51]={0,1};
+int main()
+{
+    int i,j;
+    for(i=2;i<=51;i++)
+        a[i]=a[i-1]+a[i-2];
+    while(~scanf("%d",&i)&&i!=-1)
+        printf("%I64d\n",a[i]);
+    return 0;
+}
