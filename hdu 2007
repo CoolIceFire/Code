@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int n,i,m,x,y,t;
+    while(scanf("%d %d",&x,&y)!=EOF)
+    {
+        n=m=0;if(x>y){t=x;x=y;y=t;}
+        for(i=x;i<=y;i++)
+        {if(i%2)m+=i*i*i;else n+=i*i;}
+        printf("%d %d\n",n,m);
+    }
+    return 0;
+}
