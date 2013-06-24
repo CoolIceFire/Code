@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<stdlib.h>
+int arr[110];
+int cmp(const void *a,const void *b)
+{
+    return *(int *)a-*(int *)b;
+}
+int main()
+{
+    int c,n,v,w,j,i;
+    float res;
+    scanf("%d",&c);
+    while(c--)
+    {
+        res=0.0,j=0,i=0;
+        scanf("%d%d%d",&n,&v,&w);
+        while(n--)
+        {
+            scanf("%d",&arr[i++]);
+        }
+        qsort(arr,i,sizeof(int),cmp);
+        for(n=0;n<i;n++)
+            if(res+arr[n]<=w*(j+1))res+=arr[n],j+=1;
+        if(res==0)puts("0 0.00");
+        else
+            printf("%d %.2lf\n",j*v,res/(j*100));
+    }
+}
+
