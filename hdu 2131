@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+char ch[210];
+int main()
+{
+    int i,len,s;
+    char c;
+    while(~scanf("%c",&c))
+    {
+        s=0;
+        getchar();
+        scanf("%s",ch);
+        getchar();
+        len=strlen(ch);
+        for(i=0;i<len;i++)
+            if(toupper(c)==toupper(ch[i]))s+=1;
+        printf("%.5lf\n",1.0*s/len);
+    }
+    return 0;
+}
