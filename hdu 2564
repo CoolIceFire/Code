@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+char ch[1000];
+int main()
+{
+    int t,i,len,j;
+    char c;
+    scanf("%d",&t);
+    getchar();
+    while(t--)
+    {
+        memset(ch,0,1000);
+        gets(ch);
+        if(ch[0]!=' ')putchar(toupper(ch[0]));
+        len=strlen(ch);
+        for(i=0;i<len;i++)
+        {
+            if(ch[i]==' ')
+            {
+                while(ch[i]==' ')
+                {
+                    i+=1;
+                    if(i>=len)break;
+                }
+                if(i<len)
+                    putchar(toupper(ch[i]));
+            }
+        }
+        puts("");
+    }
+    return 0;
+}
