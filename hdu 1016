@@ -1,0 +1,48 @@
+#include<string.h>
+#include<stdio.h>
+
+int visit[21];
+int queue[21];
+int n;
+int isprime[] = {0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0};
+
+int dfs(int depth)
+{
+  int i;
+	if(depth==n)
+	{
+		if(isprime[queue[n-1]+1]==1)
+		{
+			for(i=0;i<n-1;i++)
+				printf("%d ",queue[i]);
+			printf("%d\n",queue[n-1]);
+		}
+		return ;
+	}
+	else
+	{
+		for(i=1;i<n;i++)
+		{
+			if(visit[i]==0 && isprime[i+1+queue[depth-1]]==1 )
+			{
+				queue[depth]=i+1;
+				visit[i]=1;
+				dfs(depth+1);
+				visit[i]=0;
+			}
+		}
+	}
+}
+int main()
+{
+	int j=1;
+	while(~scanf("%d",&n))
+	{
+		memset(visit,0,sizeof(visit));
+		queue[0]=1;
+		printf("Case %d:\n",j++);
+		dfs(1);
+		printf("\n");
+	}
+	return 0;
+}
