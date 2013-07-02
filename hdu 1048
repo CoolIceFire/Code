@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+
+char ch[300];
+char stop[15]="ENDOFINPUT";
+char key[200];
+int main()
+{
+  char statue[15],nouse[15],c;
+	int len,i;
+	for(c='A';c<='Z';c++)
+	{
+		if(c<'F')key[c]=c+21;
+		else key[c]=c-5;
+	}
+	while(gets(statue))
+	{
+		if(strcmp(stop,statue)==0)break;
+		gets(ch);
+		len=strlen(ch);
+		for(i=0;i<len;i++)
+		{
+			if(ch[i]>='A'&&ch[i]<='Z')
+				putchar(key[ch[i]]);
+			else putchar(ch[i]);
+		}
+		puts("");
+		gets(nouse);
+	}
+	return 0;
+}
