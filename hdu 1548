@@ -1,0 +1,66 @@
+#include<stdio.h>
+
+typedef struct node{
+  int x,count;
+}node;
+
+node queue[10000];
+
+int lift[210]={0,3,3,1,2,5};
+int N,A,B;
+int left,right;
+int visit[420];
+
+int bfs(int x)
+{
+	int i,j,up,down;
+	if(x==B)return 0;
+	for(i=left;i<right;i++)
+	{
+		up=queue[i].x+lift[queue[i].x];
+		down=queue[i].x-lift[queue[i].x];
+		if(up==B||down==B)return queue[i].count+1;
+		if(up<=N&&visit[2*(queue[i].x)-1]==1)
+		{
+			queue[right].x=up;
+			queue[right++].count=queue[i].count+1;
+			visit[2*(queue[i].x)-1]=2;
+		}
+		if(down>=1&&visit[2*(queue[i].x)]==-1)
+		{
+			
+			queue[right].x=down;
+			queue[right++].count=queue[i].count+1;
+			visit[2*(queue[i].x)]=-2;
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	int i,j;
+
+	while(~scanf("%d",&N)&&N)
+	{
+		scanf("%d%d",&A,&B);
+
+		for(i=1;i<=N;i++)
+			scanf("%d",&lift[i]);
+		for(i=1;i<420;i++)
+		{
+			if(i%2==1)visit[i]=1;
+			else visit[i]=-1;
+		}
+
+		left=1,right=2;
+		if(B>N)puts("-1");
+		else
+		{
+			queue[left].x=A,queue[left].count=0;
+			printf("%d\n",bfs(A));
+		}
+	}
+
+	return 0;
+}
