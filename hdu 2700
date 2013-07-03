@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+
+char ch[40];
+
+int main()
+{
+  int len,count=0,i;
+  
+	while(gets(ch))
+	{
+		if(ch[0]=='#')break;
+		len=strlen(ch);
+		for(i=0;i<len-1;i++)
+			if(ch[i]=='1')count++;
+		if(ch[len-1]=='e')
+		{
+			if(count%2==0)ch[len-1]='0';
+			else ch[len-1]='1';
+		}
+		else
+		{
+			if(count%2==0)ch[len-1]='1';
+			else ch[len-1]='0';
+		}
+		puts(ch);
+		count=0;
+	}
+  
+	return 0;
+}
