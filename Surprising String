@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int arr[80];
+
+int cmp(const void *a,const void *b)
+{
+  return *(int *)a-*(int *)b;
+}
+
+int main()
+{
+	int len,i,j,k,flag;
+	char s[80];
+	while(gets(s))
+	{
+		if(s[0]=='*')break;
+		len=strlen(s);
+		memset(arr,0,sizeof(arr));
+		flag=0;
+		for(j=1;j<len;j++)
+		{
+			for(i=0;i<len-1;i++)
+			{
+				if(i+j>=len)break;
+				arr[i]=(s[i]-64)*27+s[i+j]-64;
+			}
+			qsort(arr,i+1,sizeof(int),cmp);
+			for(k=0;k<i;k++)
+			{
+				if(arr[k]==arr[k+1])flag=1;
+			}
+			if(flag==1)
+				break;
+			memset(arr,0,sizeof(arr));
+		}
+		if(1==flag)
+		{
+			printf("%s is NOT surprising.\n",s);
+		}
+		else
+			printf("%s is surprising.\n",s);
+	}
+
+	return 0;
+}
