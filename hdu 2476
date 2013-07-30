@@ -1,0 +1,74 @@
+//其实如果a串是空串的话，我们可以写出这样的区间dp方程：
+//设dp[i][j]表示从i到j至少要变多少次，则有dp[i][j]=min(dp[i+1][j]+(b[i]==b[j]?0:1),dp[i+1][k]+dp[k+1][j](b[i]==b[k]))。
+//然后再考虑a串,设f[i]表示使a[0]~~a[i]==b[0]~~b[i]的最小步数，
+//则有f[i]=min(f[j]+dp[j+1][i],dp[0][i],f[i-1](当a[i]==b[i]时))，即[j+1,i]可以看做一个空串。
+
+#include<stdio.h>
+#include<string.h>
+
+char a[110],b[110];
+int dp[110][110];
+int f[110];
+int len;
+
+void solve(int i,int j)
+{
+  int k;
+
+	if(dp[i][j]>=0)return ;
+	solve(i+1,j);
+	dp[i][j]=dp[i+1][j]+(b[i]==b[j]?0:1);
+	for(k=i+1;k<=j-1;k++)
+	{
+		if(b[i]==b[k])
+		{
+			solve(i+1,k);
+			solve(k+1,j);
+			if(dp[i+1][k]+dp[k+1][j]<dp[i][j]||dp[i][j]==-1)
+			{
+				dp[i][j]=dp[i+1][k]+dp[k+1][j];
+			}
+		}
+	}
+}
+int main()
+{
+	int i,j;
+	while(gets(a))
+	{
+		gets(b);
+		len=strlen(a);
+		memset(dp,-1,sizeof(dp));
+		memset(f,-1,sizeof(f));
+		for(i=0;i<len;i++)
+			dp[i][i]=1;
+		for(i=0;i<len;i++)
+		{
+			for(j=0;j<len;j++)
+			{
+				if(dp[i][j]==-1)
+				{
+					solve(i,j);
+				}
+			}
+		}
+		f[0]=a[0]==b[0]?0:1;
+		for(i=1;i<len;i++)
+		{
+			f[i]=dp[0][i];
+			if(a[i]==b[i])
+				f[i]=f[i-1];
+			else
+			{
+				for(j=0;j<=i-1;j++)
+				{
+					if(f[j]+dp[j+1][i]<f[i])
+						f[i]=f[j]+dp[j+1][i];
+				}
+			}
+		}
+		printf("%d\n",f[len-1]);
+	}
+
+	return 0;
+}
