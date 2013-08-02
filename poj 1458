@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+
+char a[1010],b[1010];
+int dp[1010][1010];
+
+int Max(int a,int b)
+{
+  return a>b?a:b;
+}
+
+int main()
+{
+	int i,j,k,len,len1,len2,max;
+
+	while(~scanf("%s",a))
+	{
+		getchar();
+		scanf("%s",b);
+		getchar();
+		memset(dp,0,sizeof(dp));
+		len1=strlen(a);
+		len2=strlen(b);
+		max=0;
+		for(i=1;i<=len1;i++)
+		{
+			for(j=1;j<=len2;j++)
+			{
+				if(a[i-1]==b[j-1])
+					dp[i][j]=dp[i-1][j-1]+1;
+				else
+					dp[i][j]=Max(dp[i-1][j],dp[i][j-1]);
+				max=Max(max,dp[i][j]);
+			}
+		}
+		printf("%d\n",max);
+	}
+
+	return 0;
+}
