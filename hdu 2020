@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+  int arr[110],n,i,j,temp,flag;
+
+	while(~scanf("%d",&n)&&n)
+	{
+		for(i=0;i<n;i++)
+			scanf("%d",&arr[i]);
+		for(i=1;i<n;i++)
+		{
+			for(j=0;j<n-i;j++)
+			{
+				if(abs(arr[j])<abs(arr[j+1]))
+					temp=arr[j],arr[j]=arr[j+1],arr[j+1]=temp;
+			}
+		}
+
+		for(flag=i=0;i<n;i++)
+		{
+			if(flag++)printf(" ");
+			printf("%d",arr[i]);
+		}
+		puts("");
+	}
+
+	return 0;
+}
