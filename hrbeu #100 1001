@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int arr[10010];
+
+int cmp(const void *a,const void *b)
+{
+        return *(int *)a-*(int *)b;
+}
+int main()
+{
+        int N,i,j,sum;
+        scanf("%d",&N);
+        for(i=1;i<=N;i++)
+                scanf("%d",&arr[i]);
+        qsort(arr,N+1,sizeof(int),cmp);
+        printf("%d\n",arr[(N+1)/2]);
+
+        return 0;
+}
