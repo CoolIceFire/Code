@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+typedef struct{
+        char ch[35];
+        int count;
+}node;
+
+node arr[10010];
+
+int cmp(const void *a,const void *b)
+{
+        node aa,bb;
+        aa=*(node *)a,bb=*(node *)b;
+        return strcmp(aa.ch,bb.ch);
+}
+
+int main()
+{
+        int k=0,i,sum;
+        char str[35];
+        FILE *file;
+        for(i=0;i<10010;i++)
+                arr[i].count=0;
+        while(gets(str))
+        {
+                for(i=0;i<k;i++)
+                {
+                        if(strcmp(arr[i].ch,str)==0)
+                        {
+                                arr[i].count+=1;
+                                break;
+                        }
+                }
+                if(i==k)
+                {
+                        strcpy(arr[k].ch,str);
+                        arr[k].count+=1;
+                        k+=1;
+                }
+        }
+        qsort(arr,k,sizeof(node),cmp);
+        for(sum=i=0;i<k;i++)
+                sum+=arr[i].count;
+        for(i=0;i<k;i++)
+                printf("%s %.4lf\n",arr[i].ch,((double)(100*arr[i].count))/((double)sum));
+        return 0;
+}
