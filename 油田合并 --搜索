@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char ch[55][55];
+int n,m;
+
+void dfs(int x,int y)
+{
+    if(ch[x][y]=='@')ch[x][y]='!';
+    if(y<m-1&&ch[x][y+1]=='@')dfs(x,y+1);
+    if(y>0&&ch[x][y-1]=='@')dfs(x,y-1);
+    if(x>0&&ch[x-1][y]=='@')dfs(x-1,y);
+    if(x<n-1&&ch[x+1][y]=='@')dfs(x+1,y);
+}
+int main()
+{
+    int i,j,ans;
+    while(~scanf("%d%d",&n,&m))
+    {
+        getchar();
+        for(i=0;i<n;i++)
+            gets(ch[i]);
+        ans=0;
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<m;j++)
+            {
+               if(ch[i][j]=='@')ans+=1,dfs(i,j);
+            }
+        }
+        printf("%d\n",ans);
+    }
+
+    return 0;
+}
