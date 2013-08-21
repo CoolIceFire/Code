@@ -1,0 +1,79 @@
+#include<stdio.h>
+
+#define lson l,m,rt<<1
+#define rson m+1,r,rt<<1|1
+const int maxn=222222;
+int sum[maxn<<2];
+
+int Max(int a,int b)
+{
+    return a>b?a:b;
+}
+
+void PushUP(int rt)
+{
+    sum[rt]=Max(sum[rt<<1],sum[rt<<1|1]);
+}
+
+void build(int l,int r,int rt)
+{
+    int m;
+    if(l==r)
+    {
+        scanf("%d",&sum[rt]);
+		return ;
+    }
+    m=(l+r)>>1;
+    build(lson);
+    build(rson);
+    PushUP(rt);
+}
+
+void update(int p,int add,int l,int r,int rt)
+{
+    int m;
+    if(l==r)
+    {
+        sum[rt]=add;
+        return ;
+    }
+    m=(l+r)>>1;
+    if(p<=m)update(p,add,lson);
+    else update(p,add,rson);
+    PushUP(rt);
+}
+
+int query(int L,int R,int l,int r,int rt)
+{
+    int m,ret;
+    if(L<=l&&r<=R)
+    {
+        return sum[rt];
+    }
+    m=(l+r)>>1;
+    ret=0;
+    if(L<=m)ret=Max(ret,query(L,R,lson));
+    if(R>m)ret=Max(ret,query(L,R,rson));
+    return ret;
+}
+
+int main()
+{
+    int N,M,i,a,b;
+    char c;
+    while(~scanf("%d%d",&N,&M))
+    {
+        build(1,N,1);
+        getchar();
+        for(i=0;i<M;i++)
+        {
+            scanf("%c %d %d",&c,&a,&b);
+            getchar();
+            if(c=='Q')printf("%d\n",query(a,b,1,N,1));
+            else update(a,b,1,N,1);
+        }
+    }
+
+    return 0;
+}
+
