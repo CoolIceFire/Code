@@ -1,0 +1,28 @@
+#include<stdio.h>
+
+typedef struct{
+    int x,y;
+}node;
+node point[1010];
+
+int main()
+{
+    int n,i,ans,flag;
+
+    while(~scanf("%d",&n)&&n)
+    {
+        for(i=0;i<n;i++)
+            scanf("%d%d",&point[i].x,&point[i].y);
+        point[n].x=point[0].x,point[n].y=point[0].y;
+        point[n+1].x=point[1].x,point[n+1].y=point[1].y;
+
+        for(i=0;i<n;i++)
+        {
+            ans=((point[i+2].y-point[i].y)*(point[i+1].x-point[i].x)-(point[i+1].y-point[i].y)*(point[i+2].x-point[i].x));
+            if(ans<0)break;
+        }
+        puts(i==n?"convex":"concave");
+    }
+
+    return 0;
+}
