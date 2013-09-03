@@ -1,0 +1,61 @@
+//attention: for this problem you should pay attention its lexicographic.
+//The most difficult is its direction array direction[8][2]={{-2,-1},{-2,1},{-1,-2},{-1,2},{1,-2},{1,2},{2,-1},{2,1}};
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int direction[8][2]={{-2,-1},{-2,1},{-1,-2},{-1,2},{1,-2},{1,2},{2,-1},{2,1}};
+char ans[100];
+int vis[30][30];
+int t,p,q,flag;
+
+int dfs(int x,int y)
+{
+    int i,j;
+    if(x<1||x>p||y<1||y>q)return 0;
+    if(vis[x][y])return 0;
+    vis[x][y]=1;
+    ans[2*t]=x+64,ans[2*t+1]=y+48;
+    t++;
+
+    if(p*q==t)return 1;
+    for(i=0;i<8;i++)
+    {
+        if(dfs(x+direction[i][0],y+direction[i][1]))
+            return 1;
+    }
+    t--;
+    vis[x][y]=0;
+    return 0;
+}
+
+int main()
+{
+    int n,i,j,ncase=1;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d%d",&q,&p);
+        memset(ans,0,sizeof(ans));
+        memset(vis,0,sizeof(vis));
+        flag=0;
+        for(i=1;i<=p;i++)
+        {
+            for(j=1;j<=q;j++)
+            {
+                t=0;
+                if(dfs(i,j))
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag)break;
+        }
+        printf("Scenario #%d:\n",ncase++);
+        puts(flag?ans:"impossible");
+        puts("");
+    }
+
+    return 0;
+}
