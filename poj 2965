@@ -1,0 +1,55 @@
+//枚举
+#include<stdio.h>
+#include<string.h>
+
+int map[4][4],arr[4][4];
+
+int main()
+{
+    int i,j,k,cas,ai[16],aj[16];
+    char c;
+
+    memset(arr,0,sizeof(arr));
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<4;j++)
+        {
+            scanf("%c",&c);
+            map[i][j]=c=='+'?1:0;
+        }
+        getchar();
+    }
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<4;j++)
+        {
+            if(map[i][j]==1)
+            {
+                arr[i][j]=!arr[i][j];
+                for(k=0;k<4;k++)
+                {
+                    arr[i][k]=!arr[i][k];
+                    arr[k][j]=!arr[k][j];
+                }
+            }
+        }
+    }
+    cas=0;
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<4;j++)
+        {
+            if(arr[i][j]==1)
+            {
+                ai[cas]=i+1;
+                aj[cas]=j+1;
+                cas++;
+            }
+        }
+    }
+    printf("%d\n",cas);
+    for(i=0;i<cas;i++)
+        printf("%d %d\n",ai[i],aj[i]);
+
+    return 0;
+}
