@@ -1,0 +1,28 @@
+//注意开数组的问题
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+
+int res[10000010];
+
+int main()
+{
+	int i,j,k,count,T;
+	double pre;
+
+	pre=res[1]=1;
+	for(i=2;i<=10000000;i++)
+	{
+		pre+=log10(double(i));
+		res[i]=(int)pre;
+	}
+	scanf("%d",&T);
+	while(T--)
+	{
+		scanf("%d",&i);
+		printf("%d\n",res[i]);
+	}
+
+	return 0;
+}
