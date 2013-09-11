@@ -1,0 +1,123 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int visit[10][10];
+int judge[10][10];
+int count,T,sx,sy,ex,ey,N,M,flag;
+char ch[10][10];
+
+
+int dfs(int x,int y)
+{
+
+    if(count>T)
+        return 0;
+    if(x==ex&&y==ey&&count==T)
+    {
+        flag=1;
+        return 1;
+    }
+    if(x==ex&&y==ey&&count!=T)return 0;
+    visit[x][y]=1;
+    if(y<M-1&&ch[x][y+1]!='X'&&visit[x][y+1]!=1)
+    {
+        count+=1;
+       if(dfs(x,y+1))
+        {
+            return 1;
+        }
+        else count-=1;
+    }
+
+    if(y>0&&ch[x][y-1]!='X'&&visit[x][y-1]!=1)
+    {
+        count+=1;
+        if(dfs(x,y-1))
+        {
+            return 1;
+        }
+        else count-=1;
+    }
+    if(x>0&&ch[x-1][y]!='X'&&visit[x-1][y]!=1)
+    {
+        count+=1;
+        if(dfs(x-1,y))
+        {
+            return 1;
+        }
+        else count-=1;
+    }
+    if(x<N-1&&ch[x+1][y]!='X'&&visit[x+1][y]!=1)
+    {
+        count+=1;
+        if(dfs(x+1,y))
+        {
+            return 1;
+        }
+        else count-=1;
+    }
+    visit[x][y]=0;
+
+    return 0;
+}
+
+int main()
+{
+    int i,j;
+    char c;
+    
+    while(~scanf("%d%d%d",&N,&M,&T)&&(N||M||T))
+    {
+        getchar();
+        memset(visit,0,sizeof(visit));
+        memset(ch,0,sizeof(ch));
+        memset(judge,0,sizeof(judge));
+        sx=sy=ex=ey=0;
+        for(i=0;i<N;i++)
+        {
+            for(j=0;j<M;j++)
+            {
+                scanf("%c",&c);
+                ch[i][j]=c;
+                if(c=='S')sx=i,sy=j;
+                if(c=='D')ex=i,ey=j;
+            }
+            getchar();
+        }
+        count=flag=0;
+        if((sx+sy)%2==0)
+            flag=1;
+        else flag=0;
+        for(i=0;i<N;i++)
+        {
+            for(j=0;j<M;j++)
+            {
+                judge[i][j]=flag;
+                flag=!flag;
+            }
+            flag=!judge[i][0];
+        }
+        flag=0;
+        if(T%2==0)
+        {
+            if(judge[ex][ey]==0)puts("NO");
+            else
+            {
+                dfs(sx,sy);
+                puts(flag?"YES":"NO");
+            }
+        }
+        else
+        {
+            if(judge[ex][ey]==1)puts("NO");
+            else
+            {
+                dfs(sx,sy);
+                puts(flag?"YES":"NO");
+            }
+        }
+    }
+
+    return 0;
+}
