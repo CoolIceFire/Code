@@ -1,0 +1,48 @@
+//calculate the N!
+#include<stdio.h>
+#include<string.h>
+
+int arr[40000];
+
+int main()
+{
+    int i,j,k,n;
+
+    while(~scanf("%d",&n))
+    {
+        memset(arr,0,sizeof(arr));
+        arr[0]=1;
+        k=1;
+        for(i=2;i<=n;i++)
+        {
+            for(j=0;j<k;j++)
+                arr[j]*=i;
+            for(j=0;j<k;j++)
+            {
+                arr[j+1]+=arr[j]/10;
+                arr[j]%=10;
+                if(j==k-1)
+                {
+                    if(arr[j+1]==0)break;
+                    else
+                    {
+                        k+=1;
+                        j+=1;
+                        while(arr[j]>9)
+                        {
+                            arr[j+1]+=arr[j]/10;
+                            arr[j]%=10;
+                            j+=1;
+                            k+=1;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        for(i=k-1;i>=0;i--)printf("%d",arr[i]);
+        puts("");
+    }
+
+    return 0;
+}
