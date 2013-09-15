@@ -1,0 +1,35 @@
+#include <stdio.h>
+int main()
+{
+	int a[105],b[105]={0};
+	int n,i,j,count,flag;
+	while(~scanf("%d",&n)&&n)
+	{
+	    flag=1;
+        count=0;
+        for(i=0;i<n;i++)
+            scanf("%d",&a[i]);
+        for(i=0;i<n;i++)
+            a[i]+=a[i]%2?1:0;
+        for(i=1;i<n;i++)
+            if(a[i]!=a[i-1])break;
+        if(i==n)flag=0;
+        while(flag)
+        {
+            b[0]=(a[0]+a[n-1])/2;
+            for(i=1;i<n;i++)
+                b[i]=(a[i-1]+a[i])/2;
+            for(i=0;i<n;i++)
+                a[i]=b[i];
+            for(i=0;i<n;i++)
+                a[i]+=a[i]%2?1:0;
+            for(i=1;i<n;i++)
+                if(a[i]!=a[i-1])break;
+            if(i==n)flag=0;
+            count+=1;
+        }
+        printf("%d %d\n",count,a[n-1]);
+
+	}
+	return 0;
+}
