@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+
+char ch[10010];
+
+int main()
+{
+    int N,i,j,count,len;
+    scanf("%d",&N);
+    getchar();
+    while(N--)
+    {
+        gets(ch);
+        len=strlen(ch);
+        for(i=0;i<len;i++)
+        {
+            count=1;
+            if(ch[i]==ch[i+1])
+            {
+                for(j=i;;j++)
+                    if(ch[j]!=ch[i])break;
+                count=j-i;
+                i=j-1;
+                printf("%d%c",count,ch[i]);
+            }
+            else
+                printf("%c",ch[i]);
+        }
+        puts("");
+    }
+
+    return 0;
+}
