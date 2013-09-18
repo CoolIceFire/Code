@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+
+typedef struct{
+    char ch[20];
+    int count;
+}node;
+node arr[1010];
+
+int main()
+{
+    int max,pos,i,j,k,N;
+    char c[20];
+    while(~scanf("%d",&N)&&N)
+    {
+        k=0;
+        getchar();
+        for(i=0;i<1010;i++)arr[i].count=0;
+        for(i=0;i<N;i++)
+        {
+            scanf("%s",c);
+            for(j=0;j<k;j++)
+                if(strcmp(c,arr[j].ch)==0)break;
+            if(j==k)
+                strcpy(arr[k].ch,c),k+=1;
+            else
+                arr[j].count+=1;
+        }
+        max=pos=0;
+        for(i=0;i<k;i++)
+        {
+            if(arr[i].count>max)
+            {
+                max=arr[i].count;
+                pos=i;
+            }
+        }
+        printf("%s\n",arr[pos].ch);
+    }
+    return 0;
+}
