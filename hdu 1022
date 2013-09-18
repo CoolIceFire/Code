@@ -1,0 +1,39 @@
+#include <stdio.h>
+int main()
+{
+	char in[1000],out[1000],stack[20],ans[1000];
+	int n,l,falie,i,j,k,s;
+	while(scanf("%d",&n)!=-1)
+	{
+		scanf("%s%s",in,out);
+		i=1;j=0;k=1;stack[1]=in[0];ans[0]=1;l=1;
+		falie=0;
+		while(1)
+		{
+			if(k!=0&&stack[k]==out[j])//栈不空，栈顶的列车和要出栈的        
+                                                               //首位列车编号相同
+			{k--;j++;ans[l++]=0;}//ans的1代表进栈0代表出栈方便输出
+			else if(stack[k]!=out[j]&&i<n)//首位列车不能出栈的并且有列车要进栈
+			{stack[++k]=in[i++];ans[l++]=1;}
+			if(k>9||i==n&&j!=n&&stack[k]!=out[j])//爆栈或列车全部进栈并且
+			{falie=1;break;}                     //首位列车出不去  失败
+			if(j==n)       //列车全部出栈  成功
+			{break;}
+		}
+		if(falie)
+		printf("No.\nFINISH\n");
+		else
+		{
+			printf("Yes.\n");
+			for(s=0;s<l;s++)
+			{
+				if(ans[s])
+				printf("in\n");
+				else
+				printf("out\n");	
+			}
+			printf("FINISH\n");
+		}
+	}
+	return 0;
+}
