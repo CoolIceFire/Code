@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char input[1010][1010];
+char output[1010][1010];
+char start[6]={'S','T','A','R','T','\0'};
+char end[4]={'E','N','D','\0'};
+
+int main()
+{
+    int T,i,j,k,len1,len2,x;
+    char ch[1010];
+    char a[10000],b[10000];
+
+    scanf("%d",&T);
+    getchar();
+    while(T--)
+    {
+        memset(a,0,sizeof(a));
+        memset(b,0,sizeof(b));
+        memset(input,0,sizeof(input));
+        memset(output,0,sizeof(output));
+        gets(ch);
+        i=0,x=0;
+        while(1)
+        {
+            gets(input[i]);
+            if(strcmp(input[i],end)==0)break;
+            len1=strlen(input[i]);
+            for(j=0;j<len1;j++)
+            {
+                if(input[i][j]!=' '&&input[i][j]!='\n'&&input[i][j]!='\t')
+                    a[x++]=input[i][j];
+            }
+            i+=1;
+        }
+        gets(ch);
+        j=0,x=0;
+        while(1)
+        {
+            gets(output[j]);
+            if(strcmp(output[j],end)==0)break;
+            len2=strlen(output[j]);
+            for(k=0;k<len2;k++)
+            {
+                if(output[j][k]!=' '&&output[j][k]!='\n'&&output[j][k]!='\t')
+                    b[x++]=output[j][k];
+            }
+            j+=1;
+        }
+        if(i==j)
+        {
+            for(k=0;k<i;k++)
+                if(strcmp(input[k],output[k])!=0)break;
+            if(k==i)puts("Accepted");
+            else
+            {
+                if(strcmp(a,b)==0)puts("Presentation Error");
+                else puts("Wrong Answer");
+            }
+        }
+        else
+        {
+            if(strcmp(a,b)==0)puts("Presentation Error");
+            else puts("Wrong Answer");
+        }
+    }
+
+    return 0;
+}
