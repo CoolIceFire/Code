@@ -1,0 +1,92 @@
+//字典树
+#include<cstring>
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+#define maxn1 20
+#define maxn2 3000 + 10
+struct TrieNode{
+	char word[maxn1];
+	struct TrieNode * next[ 26 ];
+	TrieNode(){
+		word[0] = '\0';
+		for(int i = 0; i < 26; i ++ ){
+			next[i] = NULL;
+		}
+	}
+} Head;
+void BuildTrie(char word1[],char word2[]){
+	struct TrieNode * p = & Head;
+	for(int i = 0; word2[ i ]; i ++ )
+	{
+		int temp = word2[ i ] - 'a';
+		if( p->next[ temp ] == NULL ){
+			struct TrieNode * q = new TrieNode;
+			p->next[ temp ] = q;
+		}
+		p = p->next[ temp ];
+	}
+	strcpy( p->word, word1 );
+}
+void SearchTrie(char word[]){
+	bool leap = true;
+	struct TrieNode * p = & Head;
+	for(int i = 0; word[ i ]; i ++ ){
+		int temp = word[ i ] - 'a';
+		if( p->next[ temp ] != NULL ){
+			p = p->next[ temp ];
+		}
+		else{
+			leap = false;
+			break;
+		}
+	}
+	if(leap&&strlen(p->word))
+	{
+		printf("%s",p->word);
+	}
+	else
+	{
+		printf("%s",word);
+	}
+}
+bool ch(char c){
+	if(c>='a'&&c<='z')
+		return true;
+	else
+		return false;
+}
+int main()
+{
+	char ss1[maxn2];
+	char ss2[maxn2];
+	scanf("%s",ss1);
+	while(scanf("%s",ss1),strcmp( ss1,"END")){
+		scanf("%s",ss2);
+		BuildTrie( ss1,ss2 );
+	}
+	scanf("%s",ss1);
+	getchar();
+	while(gets(ss1),strcmp( ss1, "END" ) ){
+		int i = 0;
+		while( ss1[i]){
+			if(ch(ss1[i]))
+			{
+				int k = 0;
+				while( ss1[ i ] && ch( ss1[ i ] ) ){
+					ss2[ k ] = ss1[ i ];
+					k ++;
+					i ++;
+				}
+				ss2[ k ] = '\0';
+				SearchTrie( ss2 );
+			}
+			else{
+				printf("%c", ss1[ i ] );
+				i ++;
+			}
+		}
+		printf("\n");
+	}
+	return 0;
+}
