@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char ch[65][65];
+char in[70],ans[70];
+int arr[70];
+
+int main()
+{
+    int i,j,k,index,len,flag;
+    while(gets(in))
+    {
+        len=strlen(in);
+        for(i=0;i<len;i++)
+        {
+            k=0;
+            for(j=i;j<len;j++)
+                ch[i][k]=in[j],k++;
+            for(j=0;j<i;j++)
+                ch[i][k]=in[j],k++;
+        }
+        flag=0;
+        len=strlen(in);
+        for(i=1;i<=len;i++)
+        {
+            strcpy(ans,in);
+            for(j=0;j<len;j++)
+                arr[j]=(ans[j]-48)*i;
+            for(j=len-1;j>0;j--)
+            {
+                arr[j-1]+=arr[j]/10;
+                arr[j]%=10;
+            }
+            for(j=0;j<len;j++)
+                ans[j]=arr[j]+48;
+            if(ans[0]>'9')flag=0;
+            else
+            {
+                for(k=0;k<len;k++)
+                {
+                    if(strcmp(ans,ch[k])==0)
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                if(k==len)flag=0;
+            }
+        }
+        printf("%s is %s\n",in,flag?"cyclic":"not cyclic");
+        memset(in,0,sizeof(in));
+        memset(ch,0,sizeof(ch));
+        memset(ans,0,sizeof(ans));
+    }
+
+    return 0;
+}
