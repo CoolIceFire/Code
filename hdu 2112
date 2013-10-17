@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char city[155][35];
+int visit[155];
+int dis[155][155];
+int distance[155];
+
+int main()
+{
+    int n,i,j,k,min,num,t,s,e,pos,flag;
+    char a[35],b[35];
+    char start[35],end[35];
+
+    while(~scanf("%d",&n)&&(n!=-1))
+    {
+        num=0;
+        for(i=0;i<155;i++)
+        {
+            for(j=0;j<155;j++)
+                dis[i][j]=1000000;
+            dis[i][i]=0;
+        }
+
+        memset(visit,0,sizeof(visit));
+        memset(distance,0,sizeof(distance));
+
+        getchar();
+        scanf("%s %s",start,end);
+        for(i=0;i<n;i++)
+        {
+            scanf("%s %s %d",a,b,&t);
+            for(j=0;j<num;j++)
+                if(strcmp(city[j],a)==0)break;
+            if(j==num)
+            {
+                strcpy(city[num],a);
+                num+=1;
+            }
+            for(k=0;k<num;k++)
+                if(strcmp(city[k],b)==0)break;
+            if(k==num)
+            {
+                strcpy(city[num],b);
+                num+=1;
+            }
+            if(t<dis[j][k])
+                dis[k][j]=dis[j][k]=t;
+        }
+        flag=1;
+        for(i=0;i<155;i++)
+            if(strcmp(city[i],start)==0)break;
+        s=i;
+        if(i==155)flag=0;
+        for(i=0;i<155;i++)
+            if(strcmp(city[i],end)==0)break;
+        e=i;
+        pos=-1;
+        if(i==155)flag=0;
+        if(flag==0)puts("-1");
+        else
+        {
+            for(i=0;i<num;i++)
+                distance[i]=dis[s][i];
+            while(1)
+            {
+                for(pos=-1,i=0;i<num;i++)
+                    if(!visit[i])
+                    {
+                        if(pos==-1||distance[i]<distance[pos])
+                            pos=i;
+                    }
+                if(pos==-1||distance[pos]>1000000)break;
+                visit[pos]=1;
+                for(i=0;i<num;i++)
+                    if(distance[i]>distance[pos]+dis[pos][i])
+                        distance[i]=distance[pos]+dis[pos][i];
+            }
+
+            if(distance[e]>1000000)puts("-1");
+            else printf("%d\n",distance[e]);
+        }
+    }
+    return 0;
+}
