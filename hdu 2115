@@ -1,0 +1,45 @@
+//it is a easy problem ~just a sort question
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    char ch[50];
+    int t;
+}node;
+node arr[15];
+
+int cmp(const void *a,const void *b)
+{
+    node aa,bb;
+    aa=*(node *)a,bb=*(node *)b;
+    if(aa.t!=bb.t)
+        return aa.t-bb.t;
+    return strcmp(aa.ch,bb.ch);
+}
+
+int main()
+{
+    int i,n,m,s,ncase=1,rank;
+    while(~scanf("%d",&n)&&n)
+    {
+        if(ncase!=1)puts("");
+        for(i=0;i<n;i++)
+        {
+            scanf("%s %d:%d",arr[i].ch,&m,&s);
+            arr[i].t=m*60+s;
+        }
+        qsort(arr,n,sizeof(node),cmp);
+        printf("Case #%d\n",ncase++);
+        printf("%s 1\n",arr[0].ch);
+        rank=1;
+        for(i=1;i<n;i++)
+        {
+            if(arr[i].t!=arr[i-1].t)rank=i+1;
+            printf("%s %d\n",arr[i].ch,rank);
+        }
+    }
+
+    return 0;
+}
