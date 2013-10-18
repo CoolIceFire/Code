@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+
+int arr[100100];
+
+int main()
+{
+    int i,j,n,m,rem;
+    while(~scanf("%d%d",&n,&m))
+    {
+        if(1==n)puts("0");
+        else
+        {
+            rem=1;
+            for(i=0;i<m;i++)
+            {
+                arr[i]=rem*10/n;
+                rem=(rem*10)%n;
+            }
+            printf("%d\n",arr[m-1]);
+        }
+    }
+
+
+    return 0;
+}
