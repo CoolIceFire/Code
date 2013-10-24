@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+
+int dp[2][10010];
+int n;
+
+int pow(int a,int b)
+{
+    int r = 1;
+    while(b)
+    {
+        if(b&1) r = (r*a)%2008;
+        a = (a*a)%2008;
+        b >>= 1;
+    }
+    return r;
+}
+
+int fun(int x)
+{
+    int i, sum = 2, flag ;
+    int xx ;
+    if (x == 1 || x == 2) return 2;
+
+    if(x <= 10000) flag = 0, xx = x;
+    else flag = 1, xx = n/x;
+
+    if(dp[flag][xx] != -1) return dp[flag][xx];
+
+    for(i = 2; i*i <= x; i++)
+    {
+        if(x % i == 0)
+        {
+            sum += fun(i);
+            if(i*i != x) sum += fun(x/i);
+        }
+        sum %= 2008;
+    }
+
+    return dp[flag][xx] = (pow(2,x)-sum+2008)%2008 ;
+}
+
+int main()
+{
+    while(~scanf("%d",&n))
+    {
+        memset(dp,-1,sizeof(dp));
+        printf("%d\n", fun(n));
+    }
+
+    return 0;
+}
