@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+const double d=1e-8;
+
+double fun(double x)
+{
+    return 8*x*x*x*x+7*x*x*x+2*x*x+3*x+6;
+}
+double search(double target)
+{
+    double left,right,mid,re;
+    left=0,right=100;
+    if(fun(left)>target) return -1;
+    if(fun(right)<target) return -1;
+    while(right-left>d)
+    {
+        mid=(left+right)/2;
+        re=fun(mid);
+        if(re-target<1e-20&&re-target>-1e-20) return mid;
+        else if(re<target) left=mid;
+        else right=mid;
+    }
+
+    return mid;
+}
+int main()
+{
+    int T;
+    double y,ans;
+
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%lf",&y);
+        ans=search(y);
+        if(ans<0)puts("No solution!");
+        else printf("%.4lf\n",ans);
+    }
+
+    return 0;
+}
