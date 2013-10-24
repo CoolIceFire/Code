@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+
+char s1[100010];
+char s2[100010];
+
+int main()
+{
+    int len1,len2,i,j,k,flag;
+
+    while(gets(s1))
+    {
+        flag = 1;
+        gets(s2);
+        len1 = strlen(s1), len2 = strlen(s2);
+        if(len1 < len2) flag = 0;
+        else
+        {
+            for(i = 0;i < len1;i ++)
+            {
+                if(s2[0] == s1[i])
+                {
+                    for(j = 0,k = i;j < len2,k < len1;j ++,k ++)
+                        if(s1[k] != s2[j])
+                            break;
+                    if((j < len2) && (k == len1))
+                    {
+                        for(k = 0;j < len2;k ++,j ++)
+                        {
+                            if(s1[k] != s2[j])
+                                break;
+                        }
+                    }
+                    if(j == len2) break;
+                }
+            }
+            if(i == len1) flag = 0;
+        }
+
+        if(flag) puts("yes");
+        else puts("no");
+    }
+
+    return 0;
+}
