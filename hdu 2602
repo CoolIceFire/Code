@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+
+int dp[1010];
+
+int max(int a,int b)
+{
+    return a > b?a:b;
+}
+
+int main()
+{
+    int T,i,j,N,V,v;
+    int num[1010],c[1010];
+
+    scanf("%d",&T);
+    while(T--)
+    {
+        memset(num,0,sizeof(num));
+        memset(c,0,sizeof(c));
+        memset(dp,0,sizeof(dp));
+
+        scanf("%d%d",&N,&V);
+        for(i=1;i<=N;i++)
+            scanf("%d",&num[i]);
+        for(i=1;i<=N;i++)
+            scanf("%d",&c[i]);
+        for(i=1;i<=N;i++)
+        {
+            for(j=V;j>=0;j--)
+            {
+                if(j>=c[i])
+                    dp[j]=max(dp[j],dp[j-c[i]]+num[i]);
+            }
+        }
+        printf("%d\n",dp[V]);
+    }
+
+    return 0;
+}
