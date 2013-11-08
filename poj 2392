@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct node
+{
+	int h,a,c;
+}ndoe;
+
+node arr[405];
+int dp[40010];
+
+int max(int a,int b)
+{
+	return a>b?a:b;
+}
+
+int cmp(const void *a,const void *b)
+{
+	node aa,bb;
+	aa=*(node *)a,bb=*(node *)b;
+	return aa.a-bb.a;
+}
+
+int main()
+{
+	int n;
+
+	while(~scanf("%d",&n))
+	{
+		for(int i=0;i<n;i++)
+		{
+			scanf("%d%d%d",&arr[i].h,&arr[i].a,&arr[i].c);
+		}
+		qsort(arr,n,sizeof(node),cmp);
+		memset(dp,0,sizeof(dp));
+		dp[0]=1;
+		int max=0;
+		for(int i=0;i<n;i++)
+		{
+			for(int j=max;j>=0;j--)
+			{
+				if(dp[j])
+				{
+					for(int k=1;k<=arr[i].c;k++)
+					{
+						int temp=j+arr[i].h*k;
+						if(temp>arr[i].a)break;
+						else
+							dp[temp]=1;
+						if(temp>max)max=temp;
+					}
+				}
+			}
+		}
+		printf("%d\n",max);
+	}
+	return 0;
+}
