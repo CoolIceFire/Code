@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int main()
+{
+    char *a="*------------*";
+    char *b="|............|";
+    char *c="|------------|";
+
+    int n,ncas=1,num,i,j;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%d",&num);
+        num/=10;
+        printf("Case #%d:\n",ncas++);
+        puts(a);
+        for(i=0;i<10-num;i++)puts(b);
+        for(i=0;i<num;i++)puts(c);
+        puts(a);
+    }
+
+    return 0;
+}
