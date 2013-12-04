@@ -1,0 +1,72 @@
+# include <stdio.h>
+
+#define lson l,m,rt << 1
+#define rson m + 1,r,rt << 1|1
+
+const int maxn = 200010;
+int MAX[maxn<<2];
+
+int h,w,n;
+
+int max(int a,int b)
+{
+    return a > b ? a : b;
+}
+
+void PushUP(int rt)
+{
+    MAX[rt] = max(MAX[rt << 1],MAX[rt << 1|1]);
+}
+
+void build(int l,int r,int rt)
+{
+    int m;
+
+    if(l == r)
+    {
+        MAX[rt] = w;
+        return ;
+    }
+    m = (l + r) >> 1;
+    build(lson);
+    build(rson);
+    PushUP(rt);
+}
+
+int query(int x,int l,int r,int rt)
+{
+    int m,ans;
+
+    if(l == r)
+    {
+        MAX[rt] -= x;
+        return l;
+    }
+    m = (l + r) >> 1;
+    ans = (MAX[rt << 1] >= x) ? query(x,lson) : query(x,rson);
+
+    PushUP(rt);
+
+    return ans;
+}
+
+int main()
+{
+    int i,x;
+
+    while(~scanf("%d%d%d",&h,&w,&n))
+    {
+        if(h > n) h = n;
+        build(1,h,1);
+        for(i = 0;i < n;i ++)
+        {
+            scanf("%d",&x);
+            if(x > MAX[1])
+                puts("-1");
+            else
+                printf("%d\n",query(x,1,h,1));
+        }
+    }
+
+    return 0;
+}
