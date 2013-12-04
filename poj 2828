@@ -1,0 +1,56 @@
+# include <stdio.h>
+
+#define lson l , m , rt<<1
+#define rson m+1 , r , rt<<1|1
+const int maxn = 200010;
+
+int empty[maxn<<2];
+int ans[maxn],pos[maxn],val[maxn];
+int index;
+
+void build(int l,int r,int rt)
+{
+    int m;
+
+    empty[rt] = r - l + 1;
+    if(l == r)
+        return ;
+    m = (l + r) >> 1;
+    build(lson);
+    build(rson);
+}
+
+void update(int p,int l,int r,int rt)
+{
+    int m;
+
+    empty[rt] --;
+    if(l == r)
+    {
+        index = l;
+        return ;
+    }
+    m = (l + r) >> 1;
+    if(empty[rt<<1] >= p)
+        update(p,lson);
+    else
+        p -= empty[rt<<1],update(p,rson);
+}
+
+int main()
+{
+    int n,i;
+
+    while(~scanf("%d",&n))
+    {
+        build(1,n,1);
+        for(i = 1;i <= n;i ++)
+            scanf("%d%d",&pos[i],&val[i]);
+        for(i = n;i >= 1;i --)
+            update(pos[i]+1,1,n,1),ans[index] = val[i];
+        for (i = 1; i <= n; ++i)
+            printf(i == n ? "%d\n" : "%d ",ans[i]);
+    }
+
+    return 0;
+}
