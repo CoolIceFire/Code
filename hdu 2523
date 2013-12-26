@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<string.h>
+
+int hash[2010];
+int main()
+{
+    int t,n,k,a[1010],i,j,kk,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&n,&k);
+        for(i=0;i<n;i++)
+            scanf("%d",&a[i]);
+        memset(hash,0,sizeof(hash));
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n;j++)
+            {
+                b=a[i]-a[j];
+                b=b<0? (-b):b;
+                hash[b]=1;
+            }
+        }
+        kk=0;
+        for(i=0;i<2010;i++)
+        {
+            if(hash[i])
+            {
+                kk++;
+                if(kk==k)
+                {
+                    printf("%d\n",i);
+                    break;
+                }
+            }
+        }
+    }
+    return 0;
+}
