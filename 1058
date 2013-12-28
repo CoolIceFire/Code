@@ -1,0 +1,48 @@
+#include <stdio.h>
+#define min(a,b) ((a) < (b) ? (a):(b))
+#define min4(a,b,c,d) min(min(a,b),min(c,d))
+
+int ans[6000];
+
+
+void fun()
+{
+    int a2,a3,a5,a7;
+    int n = 1;
+    ans[1] = 1;
+    a2 = a3 = a5 = a7 = 1;
+    while(ans[n] < 2000000000)
+    {
+        ans[++n] = min4(2*ans[a2],3*ans[a3],5*ans[a5],7*ans[a7]);
+        if(ans[n] == 2*ans[a2])
+            a2 += 1;
+        if(ans[n] == 3*ans[a3])
+            a3 += 1;
+        if(ans[n] == 5*ans[a5])
+            a5 += 1;
+        if(ans[n] == 7*ans[a7])
+            a7 += 1;
+    }
+}
+
+int main()
+{
+    int n,ten;
+    fun();
+    while(~scanf("%d",&n))
+    {
+        printf("The %d",n);
+        ten = n/10%10;
+        if(n%10 == 1 && ten != 1)
+            printf("st");
+        else if(n%10 == 2 && ten != 1)
+            printf("nd");
+        else if(n%10 == 3 && ten != 1)
+            printf("rd");
+        else
+            printf("th");
+        printf(" humble number is %d.\n",ans[n]);
+    }
+    return 0;
+}
+
