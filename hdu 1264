@@ -1,0 +1,42 @@
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+
+int visit[110][110];
+
+int main()
+{
+    int a,b,c,d,i,j,sum;
+    int temp;
+    for(i = 0;i < 110;i ++)
+        for(j = 0;j < 110;j ++)
+            visit[i][j] = 0;
+    while(~scanf("%d%d%d%d",&a,&b,&c,&d))
+    {
+        if(a == b && c == d && a == c)
+        {
+            if(a == -1 || a == -2)
+            {
+                sum = 0;
+                for(i = 1;i <= 100;i ++)
+                    for(j = 1;j <= 100;j ++)
+                        sum += visit[i][j];
+                printf("%d\n",sum);
+                memset(visit,0,sizeof(visit));
+                if(a == -2) break;
+            }
+        }
+        else
+        {
+            if(a > c)
+                temp = c,c = a,a = temp;
+            if(b > d)
+                temp = d,d = b,b = temp;
+            for(i = a+1;i <= c;i ++)
+                for(j = b+1;j <= d;j ++)
+                    visit[i][j] = 1;
+        }
+    }
+
+    return 0;
+}
