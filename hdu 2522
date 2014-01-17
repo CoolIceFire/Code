@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+
+char u[100001];
+
+int main()
+{
+    int t,a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&b);
+        if(b<0){putchar('-');b = -b;}
+        memset(u,1,b + 1);
+        a = 1;
+        u[1] = u[0] = 0;
+        printf("0.");
+        do{
+            u[a] = 0;
+            a *= 10;
+            putchar(a/b + '0');
+            a %= b;
+        }while(u[a]);
+        putchar('\n');
+    }
+
+    return 0;
+}
