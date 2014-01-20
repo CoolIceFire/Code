@@ -1,0 +1,56 @@
+//nlgn  not n^2
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+
+typedef struct node
+{
+	int num,sta;
+}node;
+node arr[220];
+char ch[50];
+int N;
+
+int cmp(const void *a,const void *b)
+{
+	node aa,bb;
+	aa = *(node *)a,bb = *(node *)b;
+	return aa.num - bb.num;
+}
+
+int main()
+{
+	int p,q,i,max,sum;
+
+	while(~scanf("%d",&N))
+	{
+		scanf("%d%d",&p,&q);
+		for(i = 0;i < N;i ++)
+		{
+			scanf("%d%d",&arr[i].num,&arr[i+N].num);
+			gets(ch);
+			arr[i].sta = -1,arr[i].sta = 1;
+		}
+		qsort(arr,2*N,sizeof(node),cmp);
+		max = arr[0].num - 1;
+		if(arr[2*N-1].num < q)
+			printf("%d\n",q);
+		else
+		{
+			sum  = 0;
+			for(i = 0;i < 2*N;i ++)
+			{
+				sum += arr[i].sta;
+				if(sum == 0&&i != 2*N-1)
+				{
+					if(max < arr[i+1].num-1)
+						max = arr[i+1].num - 1;
+				}
+			}
+			if(max >= p) printf("%d\n",max);
+			else puts("Badly!");
+		}
+	}
+
+	return 0;
+}
