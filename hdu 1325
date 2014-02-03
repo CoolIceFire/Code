@@ -1,0 +1,76 @@
+# include <iostream>
+# include <string>
+
+using namespace std;
+
+int father[1010];
+int visit[1010];
+bool flag;
+
+void Initial()
+{
+    flag = true;
+    for(int i = 0;i < 1010;i ++)
+        father[i] = i,visit[i] = 0;
+}
+
+int getfather(int x)
+{
+    if(father[x] == x) return x;
+    else
+    {
+        father[x] = getfather(father[x]);
+        return father[x];
+    }
+}
+
+void Union(int x,int y)
+{
+    int fx = getfather(x);
+    int fy = getfather(y);
+    if(fx != fy) father[fy] = fx;
+}
+
+bool judge()
+{
+    int pre = -1;
+    for(int i = 0;i < 1010;i ++)
+    {
+        if(visit[i])
+        {
+            if(pre == -1) pre = getfather(i);
+            else
+            {
+                if(getfather(i) != pre) return false;
+            }
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int a,b,cas = 1;
+
+    Initial();
+    while(cin>>a>>b)
+    {
+        if(a < 0 && b < 0) break;
+        else if(a == 0 && b == 0)
+        {
+            if(flag&&judge())cout<<"Case "<<cas<<" is a tree."<<endl;
+            else cout<<"Case "<<cas<<" is not a tree."<<endl;
+            cas ++;
+            Initial();
+        }
+        else
+        {
+            if(a == b) flag = false;
+            if(visit[b] == 1) flag = false;
+            visit[a] = visit[b] = 1;
+            Union(a,b);
+        }
+    }
+
+    return 0;
+}
