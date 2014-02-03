@@ -1,0 +1,71 @@
+# include <iostream>
+# include <algorithm>
+
+using namespace std;
+
+int n,m;
+int father[1010];
+int ans[1010];
+
+void Initial()
+{
+    for(int i = 0;i < 1010;i ++)
+        father[i] = i;
+}
+
+int getfather(int x)
+{
+    if(father[x] == x) return x;
+    else
+    {
+        father[x] = getfather(father[x]);
+        return father[x];
+    }
+}
+
+int getans()
+{
+    int k = 0;
+    for(int i = 1;i <= n;i ++)
+    {
+        int num = getfather(i);
+        bool flag = true;
+        for(int j = 0;j < k;j ++)
+        {
+            if(num == ans[j])
+            {
+                flag = false;
+                break;
+            }
+        }
+        if(flag) ans[k] = num,k += 1;
+    }
+    return k-1;
+}
+
+void Union(int x,int y)
+{
+    int fx = getfather(x);
+    int fy = getfather(y);
+    if(fx != fy) father[fx] = fy;
+}
+
+int main()
+{
+    Initial();
+    while(cin >> n)
+    {
+        if(n == 0) break;
+        cin >> m;
+        for(int i = 0;i < m;i ++)
+        {
+            int a,b;
+            cin >> a >> b ;
+            Union(a,b);
+        }
+        cout<<getans()<<endl;
+        Initial();
+    }
+
+    return 0;
+}
