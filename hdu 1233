@@ -1,0 +1,68 @@
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+
+# define INF 10000000
+
+int N;
+int graph[105][105];
+int visit[105],dis[105];
+
+int work()
+{
+    int i,j,mincost,index,sum = 0;
+
+    for(i = 1;i <= N;i ++)
+        dis[i] = graph[1][i];
+
+    visit[1] = 1;
+    for(i = 1;i < N;i ++)
+    {
+        mincost = INF;
+        for(j = 1;j <= N;j ++)
+        {
+            if(!visit[j] && dis[j] < mincost)
+            {
+                mincost = dis[j];
+                index = j;
+            }
+        }
+        visit[index] = 1;
+        sum += mincost;
+        for(j = 1;j <= N;j ++)
+        {
+            if(!visit[j] &&dis[j] > graph[index][j])
+                dis[j] = graph[index][j];
+        }
+    }
+    return sum;
+}
+
+void Init()
+{
+    int i,j;
+    memset(visit,0,sizeof(visit));
+    for(i = 1;i <= N;i ++)
+        for(j = 1;j <= N;j ++)
+            graph[i][j] = graph[j][i] = INF;
+    for(i = 1;i <= N;i ++)
+            graph[i][i] = 0;
+}
+
+int main()
+{
+    int i,a,b,c;
+
+    while(~scanf("%d",&N)&&N)
+    {
+        Init();
+        for(i = 0;i < N*(N-1)/2;i ++)
+        {
+            scanf("%d%d%d",&a,&b,&c);
+            graph[a][b] = graph[b][a] = c;
+        }
+        printf("%d\n",work());
+    }
+
+    return 0;
+}
