@@ -1,0 +1,81 @@
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+
+# define INF 1000001000
+
+int M,N;
+int graph[1010][1010];
+int dis[1010];
+int visit[1010];
+int ans[1010];
+
+void Init()
+{
+    int i,j;
+
+    for(i = 0;i < 1010;i ++)
+        for(j = 0;j < 1010;j ++)
+            graph[i][j] = (i == j ? 0 : INF);
+    memset(visit,0,sizeof(visit));
+    for(i = 0;i < 1010;i ++) dis[i] = INF;
+    memset(ans,0,sizeof(ans));
+}
+
+void Dijkstra(int a)
+{
+    int i,j,mincost,index;
+
+    dis[a] = 0;
+
+    for(i = 1;i <= N;i ++)
+    {
+        mincost = INF;
+        for(j = 1;j <= N;j ++)
+        {
+            if(!visit[j] && dis[j]<mincost)
+                index = j,mincost = dis[j];
+        }
+        visit[index] = 1;
+        for(j = 1;j <= N;j ++)
+        {
+            if(!visit[j] && dis[j] > dis[index]+graph[j][index])
+                dis[j] = dis[index] + graph[j][index];
+        }
+    }
+}
+
+int dfs(int k)
+{
+    int i,j;
+
+    if(ans[k]) return ans[k];
+    if(k == 2) return 1;
+    for(i = 1;i <= N;i ++)
+    {
+        if(graph[i][k]!=INF && dis[k]>dis[i])
+            ans[k] += dfs(i);
+    }
+    
+    return ans[k];
+}
+
+int main()
+{
+    int i,j,a,b,d;
+
+    while(~scanf("%d",&N) && N)
+    {
+        scanf("%d",&M);
+        Init();
+        for(i = 0;i < M;i ++)
+        {
+            scanf("%d%d%d",&a,&b,&d);
+            graph[a][b] = graph[b][a] = d;
+        }
+        Dijkstra(2);
+        printf("%d\n",dfs(1));
+    }
+
+    return 0;
+}
