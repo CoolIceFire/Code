@@ -1,0 +1,64 @@
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# define INF 1000000
+int heap[1000010];
+int arr[1000010];
+int k,n;
+
+int cmp(const void *a,const void *b){return *(int *)a - *(int *)b;}
+void update(int val)
+{
+    int i = 1;
+    while(val > heap[i*2] || val > heap[i*2+1])
+    {
+        if(heap[i*2] > heap[i*2+1])
+        {
+            heap[i] = heap[i*2+1];
+            i = i<<1|1;
+            heap[i] = val;
+        }
+        else
+        {
+            heap[i] = heap[i*2];
+            i = i<<1;
+            heap[i] = val;
+        }
+    }
+}
+int main()
+{
+    int i,value;
+    char c;
+    while(~scanf("%d%d",&n,&k))
+    {
+        for(i = 0; i < 1000010; i++) heap[i] = INF;
+        getchar();
+        for(i = 0; i < k; i++)
+        {
+            scanf("%c %d",&c,&arr[i]);
+            getchar();
+        }
+        qsort(arr,k,sizeof(int),cmp);
+        for(i = 1; i <= k; i++)
+            heap[i] = arr[i-1];
+        for(i = 0; i < n-k; i++)
+        {
+            scanf("%c",&c);
+            if(c == 'Q') printf("%d\n",heap[1]);
+            else
+            {
+                scanf(" %d",&value);
+
+                if(value > heap[1])
+                {
+                    heap[1] = value;
+                    update(value);
+                }
+            }
+            getchar();
+        }
+    }
+
+    return 0;
+}
