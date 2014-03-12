@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int trie[1010][1010];
+int X, N, T;
+
+int lowBit( int x )
+{
+    return x & (-x);
+}
+
+void update( int x, int y, int val )
+{
+    int i, j;
+    for( i = x; i <= N; i += lowBit(i) )
+        for( j = y; j <= N; j += lowBit(j))
+            trie[i][j] += val;
+}
+
+long long int getSum( int x, int y )
+{
+    long long int sum = 0;
+    int i, j;
+    for( i = x; i > 0; i -= lowBit(i) )
+        for( j = y; j > 0; j -= lowBit(j) )
+            sum += trie[i][j];
+
+    return sum;
+}
+
+int main()
+{
+    int i, x1, x2, y1, y2;
+    char c;
+
+    scanf("%d", &X);
+    while( X-- )
+    {
+        memset( trie, 0, sizeof(trie) );
+        scanf("%d%d", &N, &T);
+        getchar();
+        for( i = 0; i < T; i++ )
+        {
+            scanf("%c", &c);
+            if(c == 'C')
+            {
+                scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
+                update( x2+1, y2+1, 1 );
+                update( x1, y1, 1 );
+                update( x1, y2+1, -1 );
+                update( x2+1, y1, -1 );
+            }
+            else
+            {
+                scanf("%d%d", &x1, &y1);
+                printf("%I64d\n", getSum(x1, y1)%2);
+            }
+            getchar();
+        }
+        puts("");
+    }
+
+    return 0;
+}
