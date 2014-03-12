@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+typedef struct node
+{
+    int x, y;
+}node;
+node arr[1010000];
+int xx[1010];
+
+int lowbit(int x)
+{
+    return x & (-x);
+}
+
+void update( int x )
+{
+    while( x < 1010 )
+    {
+        xx[x]++;
+        x += lowbit(x);
+    }
+}
+
+int getSum( int pos )
+{
+    int sum = 0;
+
+    while( pos > 0 )
+    {
+        sum += xx[pos];
+        pos -= lowbit(pos);
+    }
+    return sum;
+}
+
+int cmp( const void *a, const void *b )
+{
+    node aa, bb;
+    aa = *(node *)a, bb = *(node *)b;
+    if( aa.x == bb.x ) return bb.y - aa.y;
+    return bb.x - aa.x;
+}
+
+int main()
+{
+    int T, N, M, K, i, x, y, ncas = 1;
+    long long sum;
+
+    scanf("%d", &T);
+
+    while( T-- )
+    {
+        memset( xx, 0, sizeof(xx) );
+        sum = 0;
+        scanf("%d%d%d", &N, &M, &K);
+        for( i = 0; i < K; i++ )
+            scanf("%d%d", &arr[i].x, &arr[i].y);
+        qsort( arr, K, sizeof(node), cmp );
+        for( i = 0; i < K; i++)
+        {
+            sum += (long long int)getSum(arr[i].y-1);
+            update(arr[i].y);
+        }
+        printf("Test case %d: %I64d\n", ncas++, sum);
+    }
+
+    return 0;
+}
