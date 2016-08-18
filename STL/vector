@@ -1,0 +1,104 @@
+template <typename T>
+class MyVector
+{
+public:
+	explicit MyVector(int count = 0) : _size(count), _capacity(count+EXTEND_CAPACITY)
+	{
+		obj = new T[_capacity];
+	}
+
+	MyVector(const MyVector& other)
+	{
+		if (this == &other) return ;
+		_capacity = other.capacity();
+		_size = other.size();
+		obj = new T[_capacity];
+		for (int i = 0; i < size; ++i)
+			obj[i] = other[i];
+	}
+
+	MyVector& operator=(const MyVector& other)
+	{
+		if (this == &other) return ;
+		delete[] obj;
+		_capacity = other.capacity();
+		_size = other.size();
+		obj = new T[_capacity];
+		for (int i = 0; i < size; ++i)
+			obj[i] = other[i];
+		return *this;
+	}
+
+	T& operator[](int idx)
+	{
+		return &obj[idx]; 
+	}
+
+	const T& operator[](int idx) const
+	{
+		return &obj[idx];
+	}
+
+	bool empty() const
+	{
+		return _size == 0;
+	}
+
+	int size() const
+	{
+		return _size;
+	}
+
+	int capacity() const
+	{
+		return _capacity;
+	}
+
+	void reverse(int cnt)
+	{
+		T* old = obj;
+		_capacity = cnt;
+		obj = new T[_capacity];
+		for (int i = 0; i < _size; ++i)
+			obj[i] = old[i];
+		delete[] old;
+	}
+
+	void push_back(T val)
+	{
+		if (_size == _capacity)
+			reverse(2*_capacity+1);
+		obj[_size++] = val;
+	}
+
+	void pop_back()
+	{
+		if (size == 0)
+		{
+			cout << "Error : the vector is empty" << endl;
+			return ;
+		}
+		_size--;
+	}
+
+	typedef T* iterator;
+	
+	iterator begin()
+	{
+		return &obj[0];
+	}
+
+	iterator end()
+	{
+		return &obj[_size];
+	}
+	enum
+	{
+		EXTEND_CAPACITY = 24
+	};
+	
+private:
+	int _size;
+	int _capacity;
+	T* obj;
+};
